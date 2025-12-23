@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+
+body {
+  @apply bg-white text-neutral-950 antialiased;
+}
+
+::selection {
+  background: rgba(16, 185, 129, 0.22);
+}
+
+/* Softer rendering */
+* {
+  text-rendering: geometricPrecision;
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 18s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+}
+@keyframes logo-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-scroll {
+  animation: logo-scroll 40s linear infinite;
+}
+/* Southbase logo ticker */
+.sb-ticker {
+  animation: sb-marquee 26s linear infinite;
+  will-change: transform;
+}
+
+@keyframes sb-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-ticker {
+    animation: none !important;
+    transform: none !important;
+  }
+}
