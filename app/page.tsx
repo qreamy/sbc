@@ -208,7 +208,7 @@ export default function HomePage() {
           ["Träning", "Öppningar, kvalificering, invändningar. Rollspel som sitter i vardagen."],
           ["Coachloop", "Kort coaching varje vecka + fokusområden som håller utvecklingen i sig."],
         ] as [string, string][],
-        micro: "Bäst när ni redan har säljare – men vill höja nivå och kvalitet snabbt.",
+        micro: "Bästa när ni redan har säljare – men vill höja nivå och kvalitet snabbt.",
       },
     }),
     []
