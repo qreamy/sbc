@@ -1,0 +1,49 @@
+# Operativsystemspecifika filer
+.DS_Store          # macOS
+Thumbs.db          # Windows
+
+# IDEs och textredigerare
+.idea/             # JetBrains/IntelliJ IDEs
+.vscode/           # VSCode
+*.sublime-workspace
+*.sublime-project
+
+# Filer som kan vara tillfälliga
+*.swp              # Vim
+*.swo              # Vim
+
+# Node.js specifika filer
+node_modules/      # Node.js dependencies
+npm-debug.log      # npm debug logs
+yarn-debug.log     # yarn debug logs
+yarn-error.log     # yarn error logs
+
+# Python specifika filer
+*.pyc              # Python bytecode
+__pycache__/       # Python bytecode cache
+
+# Python virtualenvs
+venv/               # Virtual environments
+
+# macOS specifika filer
+.DS_Store          # Finder system files
+
+# Loggfiler
+*.log
+
+# Byggfiler
+/dist/              # Byggprodukter
+/build/             # Byggprodukter
+
+# Filer för IDE som kan vara tillfälliga
+*.sublime-workspace
+*.sublime-project
+
+# Ignorera .env (om du använder den för miljövariabler)
+.env
+
+# Git LFS spårade filer (kan vara användbart för stora filer som bilder eller binära filer)
+*.psd
+*.ai
+*.mp4
+*.zip
