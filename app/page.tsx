@@ -250,14 +250,23 @@ export default function HomePage() {
       `}</style>
 
       {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden bg-neutral-50/30">
+      <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 opacity-[0.10] [background-image:radial-gradient(rgba(0,0,0,0.25)_1px,transparent_1px)] [background-size:28px_28px]" />
-          <div className="absolute -top-40 left-1/2 h-[540px] w-[860px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.06),rgba(0,0,0,0)_70%)] blur-3xl" />
-          <div className="absolute -bottom-44 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.05),rgba(0,0,0,0)_70%)] blur-3xl" />
+          {/* Background Image */}
+          <img 
+            src="/hero-background.jpg"
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover z-0"
+            style={{ opacity: 0.5 }}
+          />
+          {/* Light overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-white/60 z-[1]" />
+          <div className="absolute inset-0 z-[2] opacity-[0.10] [background-image:radial-gradient(rgba(0,0,0,0.25)_1px,transparent_1px)] [background-size:28px_28px]" />
+          <div className="absolute -top-40 left-1/2 h-[540px] w-[860px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.06),rgba(0,0,0,0)_70%)] blur-3xl z-[2]" />
+          <div className="absolute -bottom-44 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.05),rgba(0,0,0,0)_70%)] blur-3xl z-[2]" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 sm:pt-24 lg:pt-28">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-16 pt-20 sm:pt-24 lg:pt-28">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-[11px] font-medium tracking-[0.22em] text-neutral-500">
               NORDISK SÄLJPARTNER
@@ -376,12 +385,17 @@ export default function HomePage() {
                   onClick={() => setActive("operativt")}
                   className={[cardBase, cardShadow, active === "operativt" ? cardActive : cardInactive].join(" ")}
                 >
+                  {/* Active indicator with gradient */}
                   <div
                     className={[
-                      "pointer-events-none absolute inset-y-0 left-0 w-[6px] bg-[rgb(var(--accent))] transition-opacity duration-300",
+                      "pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[rgb(var(--accent))] to-[rgb(var(--accent))]/60 transition-all duration-300",
                       active === "operativt" ? "opacity-100" : "opacity-0",
                     ].join(" ")}
                   />
+                  {/* Subtle gradient overlay when active */}
+                  {active === "operativt" && (
+                    <div className="pointer-events-none absolute inset-0 rounded-[28px] opacity-[0.03] bg-[rgb(var(--accent))]" />
+                  )}
 
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -402,13 +416,13 @@ export default function HomePage() {
 
                   <div className="mt-8 space-y-4">
                     {details.operativt.bullets.map(([k, v], idx) => (
-                      <div key={k}>
+                      <div key={k} className="group/item">
                         <div className="flex items-start justify-between gap-6">
-                          <p className="text-sm text-neutral-600">{k}</p>
+                          <p className="text-sm text-neutral-600 transition-colors group-hover/item:text-neutral-700">{k}</p>
                           <p className="text-sm font-medium text-neutral-900">{v}</p>
                         </div>
                         {idx !== details.operativt.bullets.length - 1 && (
-                          <div className="mt-4 h-px w-full bg-neutral-200/70" />
+                          <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-neutral-200/70 to-transparent" />
                         )}
                       </div>
                     ))}
@@ -428,12 +442,17 @@ export default function HomePage() {
                   onClick={() => setActive("utbildning")}
                   className={[cardBase, cardShadow, active === "utbildning" ? cardActive : cardInactive].join(" ")}
                 >
+                  {/* Active indicator with gradient */}
                   <div
                     className={[
-                      "pointer-events-none absolute inset-y-0 left-0 w-[6px] bg-[rgb(var(--accent))] transition-opacity duration-300",
+                      "pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[rgb(var(--accent))] to-[rgb(var(--accent))]/60 transition-all duration-300",
                       active === "utbildning" ? "opacity-100" : "opacity-0",
                     ].join(" ")}
                   />
+                  {/* Subtle gradient overlay when active */}
+                  {active === "utbildning" && (
+                    <div className="pointer-events-none absolute inset-0 rounded-[28px] opacity-[0.03] bg-[rgb(var(--accent))]" />
+                  )}
 
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -454,13 +473,13 @@ export default function HomePage() {
 
                   <div className="mt-8 space-y-4">
                     {details.utbildning.bullets.map(([k, v], idx) => (
-                      <div key={k}>
+                      <div key={k} className="group/item">
                         <div className="flex items-start justify-between gap-6">
-                          <p className="text-sm text-neutral-600">{k}</p>
+                          <p className="text-sm text-neutral-600 transition-colors group-hover/item:text-neutral-700">{k}</p>
                           <p className="text-sm font-medium text-neutral-900">{v}</p>
                         </div>
                         {idx !== details.utbildning.bullets.length - 1 && (
-                          <div className="mt-4 h-px w-full bg-neutral-200/70" />
+                          <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-neutral-200/70 to-transparent" />
                         )}
                       </div>
                     ))}
@@ -476,7 +495,9 @@ export default function HomePage() {
 
           {/* Details panel */}
           <Reveal delayMs={140}>
-            <div className="mt-8 rounded-[28px] border border-neutral-200/80 bg-white/70 backdrop-blur p-8 shadow-[0_18px_60px_-45px_rgba(0,0,0,0.18)] sm:p-10">
+            <div className="relative mt-12 rounded-[28px] border border-neutral-200/80 bg-white/80 backdrop-blur p-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.20),0_0_0_1px_rgba(8,48,80,0.04)] sm:p-10">
+              {/* Subtle accent line at top */}
+              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/20 to-transparent" />
               <div
                 key={active}
                 className={[
@@ -493,8 +514,9 @@ export default function HomePage() {
 
                 <div className="mt-8 grid gap-6 lg:grid-cols-3">
                   {a.steps.map(([t, p], i) => (
-                    <div key={t} className="relative rounded-2xl border border-neutral-200/80 bg-white p-6">
-                      <div className="absolute right-5 top-5 text-xs font-medium text-neutral-400">
+                    <div key={t} className="group relative rounded-2xl border border-neutral-200/80 bg-white p-6 transition-all duration-300 hover:border-[rgb(var(--accent))]/30 hover:shadow-md">
+                      {/* Number badge with accent color */}
+                      <div className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full bg-[rgb(var(--accent))]/10 text-xs font-semibold text-[rgb(var(--accent))] transition-colors group-hover:bg-[rgb(var(--accent))]/15">
                         {String(i + 1).padStart(2, "0")}
                       </div>
                       <p className="text-sm font-semibold text-neutral-900">{t}</p>
