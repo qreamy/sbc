@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --accent: 8 48 80;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
