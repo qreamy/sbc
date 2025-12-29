@@ -10,13 +10,6 @@ export const metadata: Metadata = {
   title: "Southbase — Försäljning som fungerar i praktiken",
   description:
     "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering. Boka ett samtal.",
-  icons: {
-    icon: [
-      { url: "/logos/icon.png", type: "image/png" },
-    ],
-    shortcut: "/logos/icon.png",
-    apple: "/logos/icon.png",
-  },
 };
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
