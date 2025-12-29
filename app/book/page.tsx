@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 
 export default function Book() {
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative overflow-hidden bg-white">
       {/* Background Image */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 z-0">
         <img 
           src="/book-background.jpg"
           alt=""
