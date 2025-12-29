@@ -150,11 +150,19 @@ export default function HomePage() {
     speedMs: 26,
     startDelayMs: 220 + 34 * line1Text.length + 220,
   });
-  const paragraph = useTypewriter({
-    text: paragraphText,
-    speedMs: 2,
-    startDelayMs: 220 + 34 * line1Text.length + 220 + 26 * line2Text.length + 120,
-  });
+  
+  // Calculate when typewriter finishes for line2, then add delay for fade-in
+  const typewriterFinishTime = 220 + 34 * line1Text.length + 220 + 26 * line2Text.length;
+  const paragraphFadeInDelay = typewriterFinishTime + 300; // 300ms after typewriter finishes
+  
+  const [paragraphVisible, setParagraphVisible] = useState(false);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setParagraphVisible(true);
+    }, paragraphFadeInDelay);
+    return () => clearTimeout(timer);
+  }, [paragraphFadeInDelay]);
 
   const marqueeItems = useMemo(() => [...logos, ...logos], [logos]);
 
@@ -262,8 +270,12 @@ export default function HomePage() {
                 <span className="block text-neutral-500">{line2}</span>
               </h1>
 
-              <p className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-neutral-700 sm:text-lg">
-                {paragraph}
+              <p
+                className={`mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-neutral-700 sm:text-lg transition-opacity duration-700 ease-out ${
+                  paragraphVisible ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                {paragraphText}
               </p>
             </div>
 
@@ -335,7 +347,7 @@ export default function HomePage() {
         {/* ✅ ENKEL, REN “SURFACE”-OVERLAY (ingen stor mörk blob) */}
         <div className="pointer-events-none absolute inset-0 [background:linear-gradient(to_bottom,rgba(0,0,0,0.016),transparent_22%,transparent_78%,rgba(0,0,0,0.016))]" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-24">
+        <div className="relative mx-auto max-w-6xl px-6 pt-32 pb-20 sm:pt-40 sm:pb-24">
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
               <div className="lg:col-span-8">
@@ -516,4 +528,4 @@ export default function HomePage() {
       `}</style>
     </main>
   );
-}
+} 
