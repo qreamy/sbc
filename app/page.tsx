@@ -359,14 +359,18 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ✅ SMOOTH FADE ISTÄLLET FÖR STRECK */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(to_bottom,rgba(0,0,0,0),rgba(250,250,250,0.3))]" />
+        {/* Fade to next section (till #fafafa) */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-72 z-[20]"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(250,250,250,0) 0%, rgba(250,250,250,0.4) 40%, rgba(250,250,250,0.7) 70%, rgba(250,250,250,0.85) 85%, rgb(250,250,250) 100%)",
+          }}
+        />
       </section>
 
       {/* ================= VAD VI GÖR ================= */}
-      <section id="vad" className="relative bg-neutral-50/30">
-        {/* ✅ ENKEL, REN “SURFACE”-OVERLAY (ingen stor mörk blob) */}
-        <div className="pointer-events-none absolute inset-0 [background:linear-gradient(to_bottom,rgba(0,0,0,0.016),transparent_22%,transparent_78%,rgba(0,0,0,0.016))]" />
+      <section id="vad" className="relative bg-[#fafafa]">
 
         <div className="relative mx-auto max-w-6xl px-6 pt-32 pb-20 sm:pt-40 sm:pb-24">
           <Reveal>
