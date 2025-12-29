@@ -308,22 +308,21 @@ export default function HomePage() {
 
             {/* LOGO MARQUEE */}
             <div className="mt-14">
-              <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200/80 bg-white/70 px-8 py-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.30),0_0_0_1px_rgba(8,48,80,0.08)] backdrop-blur">
+              <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200/80 bg-white px-8 py-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.30),0_0_0_1px_rgba(8,48,80,0.08)]">
                 <div className="relative overflow-hidden">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-[linear-gradient(to_right,rgba(255,255,255,1),rgba(255,255,255,0))]" />
-                  <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-[linear-gradient(to_left,rgba(255,255,255,1),rgba(255,255,255,0))]" />
 
-                  <div className="sb-ticker flex w-max items-center gap-16 pr-16">
+                  <div className="sb-ticker flex w-max items-center gap-20 pr-20">
                     {marqueeItems.map((logo, idx) => (
-                      <div key={`${logo.alt}-${idx}`} className="flex h-12 items-center justify-center">
+                      <div key={`${logo.alt}-${idx}`} className="relative flex h-12 items-center justify-center flex-shrink-0">
                         <img
                           src={logo.src}
                           alt={logo.alt}
                           draggable={false}
-                          className="h-full w-auto opacity-70 transition-opacity hover:opacity-100"
+                          className="h-12 w-auto opacity-70 transition-opacity duration-300 hover:opacity-100 object-contain pointer-events-none"
                           style={{
                             transform: logo.scale ? `scale(${logo.scale})` : undefined,
-                            transformOrigin: "center",
+                            transformOrigin: "center center",
+                            maxHeight: "48px",
                           }}
                         />
                       </div>
@@ -336,8 +335,21 @@ export default function HomePage() {
                     0% { transform: translateX(0); }
                     100% { transform: translateX(-50%); }
                   }
-                  .sb-ticker { animation: sb-marquee 22s linear infinite; will-change: transform; }
+                  .sb-ticker { 
+                    animation: sb-marquee 35s linear infinite; 
+                    will-change: transform;
+                    backface-visibility: hidden;
+                    -webkit-backface-visibility: hidden;
+                    transform: translate3d(0, 0, 0);
+                    -webkit-transform: translate3d(0, 0, 0);
+                    perspective: 1000px;
+                    -webkit-perspective: 1000px;
+                  }
                   .sb-ticker:hover { animation-play-state: paused; }
+                  .sb-ticker img {
+                    display: block;
+                    max-width: none;
+                  }
                   @media (prefers-reduced-motion: reduce) {
                     .sb-ticker { animation: none !important; }
                   }
@@ -348,7 +360,7 @@ export default function HomePage() {
         </div>
 
         {/* ✅ SMOOTH FADE ISTÄLLET FÖR STRECK */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(to_bottom,rgba(0,0,0,0),rgba(250,250,250,1))]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(to_bottom,rgba(0,0,0,0),rgba(250,250,250,0.3))]" />
       </section>
 
       {/* ================= VAD VI GÖR ================= */}
