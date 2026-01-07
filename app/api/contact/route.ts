@@ -5,6 +5,15 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
+    // Kontrollera om API-nyckel är satt
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set');
+      return NextResponse.json(
+        { error: 'E-posttjänsten är inte konfigurerad. Kontakta administratören.' },
+        { status: 500 }
+      );
+    }
+
     const body = await request.json();
     const { name, email, company, message } = body;
 
@@ -26,8 +35,13 @@ export async function POST(request: Request) {
     }
 
     // Skicka e-post till mohamed@southbase.se
+    // Använd Resends testdomän för utveckling, eller verifierad domän för produktion
+    const fromEmail = process.env.NODE_ENV === 'production' 
+      ? 'Southbase <noreply@southbase.se>'
+      : 'Southbase <onboarding@resend.dev>';
+    
     const { data, error } = await resend.emails.send({
-      from: 'Southbase <noreply@southbase.se>',
+      from: fromEmail,
       to: ['mohamed@southbase.se'],
       replyTo: email,
       subject: `Ny förfrågan från ${name}${company ? ` - ${company}` : ''}`,

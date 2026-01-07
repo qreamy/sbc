@@ -38,10 +38,15 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        throw new Error("Kunde inte läsa svar från servern. Kontrollera din internetanslutning.");
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || "Ett fel uppstod");
+        throw new Error(data.error || `Serverfel: ${response.status}`);
       }
 
       setSubmitStatus({
@@ -57,6 +62,7 @@ export default function ContactForm() {
         message: "",
       });
     } catch (error) {
+      console.error("Form submit error:", error);
       setSubmitStatus({
         type: "error",
         message:
