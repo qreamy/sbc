@@ -41,6 +41,8 @@ venv/               # Virtual environments
 
 # Ignorera .env (om du använder den för miljövariabler)
 .env
+.env.local
+.env*.local
 
 # Git LFS spårade filer (kan vara användbart för stora filer som bilder eller binära filer)
 *.psd

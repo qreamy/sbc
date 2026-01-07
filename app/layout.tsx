@@ -10,6 +10,49 @@ export const metadata: Metadata = {
   title: "Southbase — Försäljning som fungerar i praktiken",
   description:
     "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering. Boka ett samtal.",
+  keywords: ["försäljning", "outbound", "säljpartner", "nordiska bolag", "telefonförsäljning", "säljutbildning"],
+  authors: [{ name: "Southbase" }],
+  creator: "Southbase",
+  publisher: "Southbase",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://southbase.se"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "sv_SE",
+    url: "/",
+    siteName: "Southbase",
+    title: "Southbase — Försäljning som fungerar i praktiken",
+    description:
+      "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering. Boka ett samtal.",
+    images: [
+      {
+        url: "/logos/icon.png",
+        width: 1200,
+        height: 630,
+        alt: "Southbase",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Southbase — Försäljning som fungerar i praktiken",
+    description:
+      "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering.",
+    images: ["/logos/icon.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -47,8 +90,46 @@ function BrandMark() {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://southbase.se";
+  
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Southbase",
+    description: "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering.",
+    url: siteUrl,
+    logo: `${siteUrl}/logos/icon.png`,
+    sameAs: [],
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Southbase",
+    url: siteUrl,
+    description: "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <html lang="sv" className={`${inter.variable} ${sora.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className="font-[var(--font-inter)]">
         <a
           href="#innehall"

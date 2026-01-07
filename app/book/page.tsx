@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Book a Call — Southbase",
+  title: "Boka ett samtal — Southbase",
   description:
-    "Book a call with Southbase to discuss outbound strategy, qualification, and pipeline systems.",
+    "Boka ett samtal med Southbase för att diskutera er försäljningsstrategi, kvalificering och pipeline-system.",
 };
 
 export default function Book() {
@@ -11,12 +13,18 @@ export default function Book() {
     <main className="relative overflow-hidden bg-white">
       {/* Background Image */}
       <div className="pointer-events-none absolute inset-0 z-0">
-        <img 
-          src="/book-background.jpg"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover z-0"
-          style={{ opacity: 0.5 }}
-        />
+        <div className="relative h-full w-full">
+          <Image 
+            src="/book-background.jpg"
+            alt=""
+            fill
+            priority
+            quality={85}
+            className="object-cover z-0"
+            style={{ opacity: 0.5 }}
+            sizes="100vw"
+          />
+        </div>
         {/* Light overlay to ensure text readability */}
         <div className="absolute inset-0 bg-white/40 z-[1]" />
         <div className="absolute inset-0 z-[2] opacity-[0.10] [background-image:radial-gradient(rgba(0,0,0,0.25)_1px,transparent_1px)] [background-size:28px_28px]" />
@@ -36,49 +44,7 @@ export default function Book() {
         </div>
 
         <div className="mt-12 max-w-2xl mx-auto">
-          <form className="rounded-2xl border border-neutral-200/80 bg-white/70 backdrop-blur p-8 md:p-10 grid gap-6 shadow-[0_18px_60px_-45px_rgba(0,0,0,0.18)]">
-            <label className="text-sm font-medium text-neutral-900">
-              Namn
-              <input
-                className="mt-2 w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accent))]/30 focus:border-[rgb(var(--accent))]/50"
-                placeholder="Ditt namn"
-                autoComplete="name"
-              />
-            </label>
-
-            <label className="text-sm font-medium text-neutral-900">
-              E-post
-              <input
-                className="mt-2 w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accent))]/30 focus:border-[rgb(var(--accent))]/50"
-                placeholder="du@foretag.se"
-                autoComplete="email"
-              />
-            </label>
-
-            <label className="text-sm font-medium text-neutral-900">
-              Företag
-              <input
-                className="mt-2 w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accent))]/30 focus:border-[rgb(var(--accent))]/50"
-                placeholder="Företagsnamn"
-                autoComplete="organization"
-              />
-            </label>
-
-            <label className="text-sm font-medium text-neutral-900">
-              Vad vill ni uppnå?
-              <textarea
-                className="mt-2 min-h-[120px] w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accent))]/30 focus:border-[rgb(var(--accent))]/50"
-                placeholder="Beskriv dina mål och vad ni försöker uppnå..."
-              />
-            </label>
-
-            <button
-              type="button"
-              className="mt-2 inline-flex items-center justify-center rounded-lg bg-[rgb(var(--accent))] px-6 py-3 text-sm font-medium text-white hover:bg-[rgb(var(--accent))]/90 transition"
-            >
-              Skicka förfrågan
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </section>
 

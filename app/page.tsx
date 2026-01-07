@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 
 /* ================= TYPEWRITER ================= */
 type TypeStep = {
@@ -253,12 +254,18 @@ export default function HomePage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
           {/* Background Image */}
-          <img 
-            src="/hero-background.jpg"
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover z-0"
-            style={{ opacity: 0.5 }}
-          />
+          <div className="relative h-full w-full">
+            <Image 
+              src="/hero-background.jpg"
+              alt=""
+              fill
+              priority
+              quality={85}
+              className="object-cover z-0"
+              style={{ opacity: 0.5 }}
+              sizes="100vw"
+            />
+          </div>
           {/* Light overlay to ensure text readability */}
           <div className="absolute inset-0 bg-white/60 z-[1]" />
           <div className="absolute inset-0 z-[2] opacity-[0.10] [background-image:radial-gradient(rgba(0,0,0,0.25)_1px,transparent_1px)] [background-size:28px_28px]" />
@@ -314,16 +321,18 @@ export default function HomePage() {
                   <div className="sb-ticker flex w-max items-center gap-20 pr-20">
                     {marqueeItems.map((logo, idx) => (
                       <div key={`${logo.alt}-${idx}`} className="relative flex h-12 items-center justify-center flex-shrink-0">
-                        <img
+                        <Image
                           src={logo.src}
                           alt={logo.alt}
-                          draggable={false}
+                          width={120}
+                          height={48}
                           className="h-12 w-auto opacity-70 transition-opacity duration-300 hover:opacity-100 object-contain pointer-events-none"
                           style={{
                             transform: logo.scale ? `scale(${logo.scale})` : undefined,
                             transformOrigin: "center center",
                             maxHeight: "48px",
                           }}
+                          loading="lazy"
                         />
                       </div>
                     ))}
