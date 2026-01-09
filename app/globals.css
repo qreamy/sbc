@@ -1,15 +1,19 @@
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700,800,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --accent: 8 48 80;
+  --font-general-sans: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  @apply bg-white text-neutral-950 antialiased;
+  @apply text-neutral-950 antialiased;
+  background: transparent;
 }
 
 ::selection {

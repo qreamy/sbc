@@ -123,12 +123,7 @@ type LogoItem = {
   scale?: number;
 };
 
-type Track = "operativt" | "utbildning";
-
 export default function HomePage() {
-  /* mörkblå accent */
-  const accent = "8 48 80";
-
   /* ---------------- HERO DATA ---------------- */
   const logos = useMemo<LogoItem[]>(
     () => [
@@ -167,127 +162,43 @@ export default function HomePage() {
 
   const marqueeItems = useMemo(() => [...logos, ...logos], [logos]);
 
-  /* ---------------- VAD VI GÖR ---------------- */
-  const [active, setActive] = useState<Track>("operativt");
-  const [lastActive, setLastActive] = useState<Track>("operativt");
-  const [swapDir, setSwapDir] = useState<"left" | "right">("right");
-
-  useEffect(() => {
-    if (active !== lastActive) {
-      setSwapDir(active === "operativt" ? "left" : "right");
-      setLastActive(active);
-    }
-  }, [active, lastActive]);
-
-  const details = useMemo(
-    () => ({
-      operativt: {
-        kicker: "DONE-FOR-YOU",
-        tag: "Operativt",
-        title: "Vi gör försäljningen åt er.",
-        desc:
-          "Operativt ansvar: prospektering, outreach, samtal och uppföljning — med spårbarhet och kvalitetskontroll.",
-        bullets: [
-          ["Leverans", "Samtal + uppföljning"],
-          ["Kvalitet", "QA + coaching"],
-          ["Uppföljning", "Veckovis rapport"],
-        ] as [string, string][],
-        panelTitle: "Så ser leveransen ut",
-        steps: [
-          ["Setup", "Målgrupp, erbjudande, öppningar, invändningar och definition av “bra lead”."],
-          ["Produktion", "Samtal + uppföljning drivs i vardagen. Varje kontakt får nästa steg."],
-          ["Förbättring", "QA på samtal, coaching och justeringar veckovis."],
-        ] as [string, string][],
-        micro: "Vanligast när ni vill få fart snabbt utan att bygga team internt.",
-      },
-      utbildning: {
-        kicker: "DONE-WITH-YOU",
-        tag: "Utbildning",
-        title: "Vi lär ert team sälja bättre.",
-        desc:
-          "Träning, manus, invändningshantering och struktur i pipeline — så att ni kan äga resultatet internt.",
-        bullets: [
-          ["Kompetens", "Samtalsteknik"],
-          ["Material", "Manus + öppningar"],
-          ["Ledning", "Rutin + uppföljning"],
-        ] as [string, string][],
-        panelTitle: "Upplägg för team",
-        steps: [
-          ["Baslinje", "Lyssning på samtal + tydlig standard för vad som är “bra”."],
-          ["Träning", "Öppningar, kvalificering, invändningar. Rollspel som sitter i vardagen."],
-          ["Coachloop", "Kort coaching varje vecka + fokusområden som håller utvecklingen i sig."],
-        ] as [string, string][],
-        micro: "Bästa när ni redan har säljare – men vill höja nivå och kvalitet snabbt.",
-      },
-    }),
-    []
-  );
-
-  const a = details[active];
-
-  // ======= shared styles (tunnare active outline) =======
-  const cardBase =
-    "group relative w-full overflow-hidden rounded-[28px] border bg-white p-9 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent))]/25";
-
-  const cardShadow =
-    "shadow-[0_12px_40px_-28px_rgba(0,0,0,0.20)] hover:-translate-y-0.5 hover:shadow-[0_28px_90px_-60px_rgba(0,0,0,0.20)]";
-
-  // Tunn blå outline (inte för tjock)
-  const cardActive =
-    "border-[rgb(var(--accent))]/35 shadow-[0_14px_44px_-34px_rgba(8,48,80,0.16)]";
-
-  const cardInactive = "border-neutral-200/80";
-
-  const badgeActive =
-    "border-[rgb(var(--accent))]/30 bg-[rgb(var(--accent))]/10 text-[rgb(var(--accent))]";
-  const badgeInactive = "border-neutral-200/80 bg-white text-neutral-600";
 
   return (
-    <main className="bg-white text-neutral-900">
-      <style jsx global>{`
-        :root {
-          --accent: ${accent};
-        }
-      `}</style>
-
+    <main className="text-neutral-900">
       {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0">
+      <section className="relative overflow-hidden min-h-[100svh]">
+        {/* Background Layer - unified surface */}
+        <div className="pointer-events-none absolute inset-0 z-0">
           {/* Background Image */}
-          <div className="relative h-full w-full">
-            <Image 
-              src="/hero-background.jpg"
-              alt=""
-              fill
-              priority
-              quality={85}
-              className="object-cover z-0"
-              style={{ opacity: 0.5 }}
-              sizes="100vw"
-            />
-          </div>
-          {/* Light overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-white/60 z-[1]" />
-          <div className="absolute inset-0 z-[2] opacity-[0.10] [background-image:radial-gradient(rgba(0,0,0,0.25)_1px,transparent_1px)] [background-size:28px_28px]" />
-          <div className="absolute -top-40 left-1/2 h-[540px] w-[860px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.06),rgba(0,0,0,0)_70%)] blur-3xl z-[2]" />
-          <div className="absolute -bottom-44 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(0,0,0,0.05),rgba(0,0,0,0)_70%)] blur-3xl z-[2]" />
+          <Image
+            src="/hero-background.jpg"
+            alt=""
+            fill
+            priority
+            quality={85}
+            className="object-cover z-0"
+            style={{ opacity: 0.5 }}
+            sizes="100vw"
+          />
+          
+          {/* Subtle overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/50 to-white/40 z-[1]" />
+          
+          {/* Soft vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.02)_100%)] z-[2]" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-16 pt-20 sm:pt-24 lg:pt-28">
+        {/* Content Layer - with padding-top to avoid navbar */}
+        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-24 pt-28 sm:pt-32 lg:pt-36">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-medium tracking-[0.22em] text-neutral-500">
-              NORDISK SÄLJPARTNER
-            </p>
-            <div className="mx-auto mt-3 h-px w-16 bg-neutral-200" />
-
             <div className="mt-8">
-              <h1 className="text-balance text-4xl font-semibold tracking-[-0.02em] leading-[1.05] sm:text-6xl">
-                <span>{line1}</span>
-                <span className="block text-neutral-500">{line2}</span>
+              <h1 className="text-balance text-4xl font-bold tracking-[-0.01em] leading-[0.95] sm:text-6xl max-w-2xl mx-auto font-[var(--font-general-sans)]">
+                <span className="text-neutral-900">{line1}</span>
+                <span className="block text-neutral-600 mt-1">{line2}</span>
               </h1>
 
               <p
-                className={`mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-neutral-700 sm:text-lg transition-opacity duration-700 ease-out ${
+                className={`mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-neutral-700 sm:text-lg transition-opacity duration-700 ease-out ${
                   paragraphVisible ? "opacity-100" : "opacity-0"
                 }`}
               >
@@ -296,17 +207,49 @@ export default function HomePage() {
             </div>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              {/* Primary CTA - Dark Frosted */}
               <a
                 href="/book"
-                className="group inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[rgb(var(--accent))] px-7 text-sm font-medium text-white shadow-[0_14px_34px_-18px_rgba(8,48,80,0.55)] transition hover:opacity-95 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent))]/30"
+                className="group inline-flex h-11 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/20 focus-visible:ring-offset-2"
+                style={{
+                  background: 'rgba(0, 0, 0, 0.55)',
+                  backdropFilter: 'blur(12px) saturate(140%)',
+                  WebkitBackdropFilter: 'blur(12px) saturate(140%)',
+                  border: '1px solid rgba(255, 255, 255, 0.14)',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.55)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.14)';
+                }}
               >
                 Boka ett samtal
                 <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
               </a>
 
+              {/* Secondary CTA - Light Frosted */}
               <a
                 href="#vad"
-                className="group inline-flex h-11 items-center justify-center gap-2 rounded-full border border-neutral-200/80 bg-white px-7 text-sm font-medium text-neutral-900 shadow-sm transition hover:bg-neutral-50 hover:border-[rgb(var(--accent))] hover:text-[rgb(var(--accent))] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent))]/30"
+                className="group inline-flex h-11 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-neutral-900 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/20 focus-visible:ring-offset-2"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.55)',
+                  backdropFilter: 'blur(12px) saturate(140%)',
+                  WebkitBackdropFilter: 'blur(12px) saturate(140%)',
+                  border: '1px solid rgba(0, 0, 0, 0.08)',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.70)';
+                  e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.12)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.55)';
+                  e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
+                }}
               >
                 Se hur vi jobbar
                 <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
@@ -314,10 +257,9 @@ export default function HomePage() {
             </div>
 
             {/* LOGO MARQUEE */}
-            <div className="mt-14">
-              <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200/80 bg-white px-8 py-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.30),0_0_0_1px_rgba(8,48,80,0.08)]">
+            <div className="mt-16">
+              <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200/80 bg-white/80 backdrop-blur-sm px-8 py-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.20)]">
                 <div className="relative overflow-hidden">
-
                   <div className="sb-ticker flex w-max items-center gap-20 pr-20">
                     {marqueeItems.map((logo, idx) => (
                       <div key={`${logo.alt}-${idx}`} className="relative flex h-12 items-center justify-center flex-shrink-0">
@@ -355,10 +297,6 @@ export default function HomePage() {
                     -webkit-perspective: 1000px;
                   }
                   .sb-ticker:hover { animation-play-state: paused; }
-                  .sb-ticker img {
-                    display: block;
-                    max-width: none;
-                  }
                   @media (prefers-reduced-motion: reduce) {
                     .sb-ticker { animation: none !important; }
                   }
@@ -368,211 +306,180 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Fade to next section (till #fafafa) */}
+        {/* Smooth fade to next section - matches Vad gör vi background exactly */}
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-72 z-[20]"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[20]"
           style={{
-            background:
-              "linear-gradient(to bottom, rgba(250,250,250,0) 0%, rgba(250,250,250,0.4) 40%, rgba(250,250,250,0.7) 70%, rgba(250,250,250,0.85) 85%, rgb(250,250,250) 100%)",
+            height: 'clamp(200px, 35vh, 480px)',
+            background: 'linear-gradient(to bottom, rgba(250,250,250,0) 0%, rgba(250,250,250,0.4) 30%, rgba(250,250,250,0.7) 60%, rgba(250,250,250,0.9) 85%, rgb(250,250,250) 100%)',
           }}
         />
       </section>
 
       {/* ================= VAD VI GÖR ================= */}
-      <section id="vad" className="relative bg-[#fafafa]">
+      <WhatWeDoSection />
+    </main>
+  );
+}
 
-        <div className="relative mx-auto max-w-6xl px-6 pt-32 pb-20 sm:pt-40 sm:pb-24">
-          <Reveal>
-            <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-              <div className="lg:col-span-8">
-                <p className="text-[11px] font-medium tracking-[0.22em] text-neutral-500">VAD VI GÖR</p>
-                <div className="mt-3 h-px w-16 bg-neutral-200" />
+/* ================= WHAT WE DO SECTION ================= */
+type ServiceItem = {
+  number: string;
+  title: string;
+  description: string;
+};
 
-                <h2 className="mt-8 text-balance text-3xl font-semibold tracking-tight text-neutral-900 sm:text-5xl">
-                  Välj spår — så får ni tydlig kontroll på{" "}
-                  <span className="text-[rgb(var(--accent))]">resultatet.</span>
-                </h2>
+function ServiceBlock({ service, index }: { service: ServiceItem; index: number }) {
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.3, rootMargin: '-100px 0px' });
+  const [isActive, setIsActive] = useState(false);
 
-                <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-neutral-700 sm:text-lg">
-                  Klicka på ett spår. Det du ser under byts direkt — med en mjuk animation — så det känns
-                  självklart vad som ingår.
-                </p>
-              </div>
+  useEffect(() => {
+    if (inView) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [inView]);
+
+  return (
+    <div
+      ref={ref}
+      className="relative transition-all duration-700 ease-out"
+      style={{
+        opacity: isActive ? 1 : 0.4,
+        transform: isActive ? 'translateY(0)' : 'translateY(4px)',
+        transitionDelay: `${index * 80}ms`,
+      }}
+    >
+      <div className="py-7 border-b border-neutral-200/50">
+        <div className="flex items-start gap-6">
+          <div className="flex-shrink-0 pt-1">
+            <span className="text-xs font-medium text-neutral-300 font-mono">
+              {service.number}
+            </span>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-2xl sm:text-3xl font-semibold text-neutral-900 mb-3 leading-[1.1] font-[var(--font-general-sans)] tracking-[-0.01em]">
+              {service.title}
+            </h3>
+            <p className="text-sm text-neutral-500 leading-relaxed font-light max-w-lg">
+              {service.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WhatWeDoSection() {
+  const services: ServiceItem[] = [
+    {
+      number: "01",
+      title: "Projektledning",
+      description: "Operativt ansvar från start till mål. Vi driver försäljningen hela vägen.",
+    },
+    {
+      number: "02",
+      title: "Process & struktur",
+      description: "Tydliga, mätbara processer som skapar transparens och förutsägbarhet.",
+    },
+    {
+      number: "03",
+      title: "Tillväxt & erbjudande",
+      description: "Optimering av erbjudande, positionering och försäljningsstrategi.",
+    },
+    {
+      number: "04",
+      title: "Sälj & kundresa",
+      description: "Helhetssyn på kundresan – från första kontakt till långsiktig affär.",
+    },
+  ];
+
+  const { ref: titleRef, inView: titleInView } = useInView<HTMLDivElement>({ threshold: 0.15 });
+  const { ref: textRef, inView: textInView } = useInView<HTMLDivElement>({ threshold: 0.15 });
+
+  return (
+    <section id="vad" className="relative bg-neutral-50 overflow-hidden py-24 sm:py-32">
+      {/* Large typographic background - echo, not design */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <span 
+            className="block text-[380px] sm:text-[500px] lg:text-[620px] font-normal text-neutral-900 whitespace-nowrap"
+            style={{ opacity: 0.04, fontFamily: 'var(--font-inter)' }}
+          >
+            EXECUTION
+          </span>
+        </div>
+      </div>
+
+      <div className="relative mx-auto max-w-6xl px-6">
+        <div className="grid md:grid-cols-2 gap-16 lg:gap-20 items-start">
+          {/* Left Column - Headline & Intro */}
+          <div className="space-y-10">
+            <div
+              ref={titleRef}
+              className="transition-all duration-700 ease-out"
+              style={{
+                opacity: titleInView ? 1 : 0,
+                transform: titleInView ? 'translateY(0)' : 'translateY(12px)',
+              }}
+            >
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.01em] leading-[0.90] max-w-xl font-[var(--font-general-sans)]">
+                <span className="text-neutral-900">Vi bygger försäljning</span>
+                <span className="block text-neutral-600 mt-2">som håller</span>
+                <span className="block text-neutral-600">över tid.</span>
+              </h2>
             </div>
-          </Reveal>
 
-          {/* Cards */}
-          <div className="mt-14 grid gap-6 lg:grid-cols-2">
-            <Reveal delayMs={60}>
-              <TiltCard>
-                <button
-                  type="button"
-                  onClick={() => setActive("operativt")}
-                  className={[cardBase, cardShadow, active === "operativt" ? cardActive : cardInactive].join(" ")}
-                >
-                  {/* Active indicator with gradient */}
-                  <div
-                    className={[
-                      "pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[rgb(var(--accent))] to-[rgb(var(--accent))]/60 transition-all duration-300",
-                      active === "operativt" ? "opacity-100" : "opacity-0",
-                    ].join(" ")}
+            <div
+              ref={textRef}
+              className="transition-all duration-700 ease-out delay-100"
+              style={{
+                opacity: textInView ? 1 : 0,
+                transform: textInView ? 'translateY(0)' : 'translateY(12px)',
+              }}
+            >
+              <p className="text-lg text-neutral-700 leading-relaxed max-w-lg">
+                Southbase tar operativt ansvar för försäljning – från struktur och process till ledarskap och genomförande.
+              </p>
+            </div>
+
+            {/* CTA - decision, not navigation */}
+            <div
+              className="mt-12 transition-all duration-700 ease-out delay-200"
+              style={{
+                opacity: textInView ? 1 : 0,
+                transform: textInView ? 'translateY(0)' : 'translateY(12px)',
+              }}
+            >
+              <a
+                href="/services"
+                className="group flex items-center gap-4 text-lg font-medium text-neutral-700 transition-all duration-200 hover:text-neutral-900"
+              >
+                <div className="w-px h-8 bg-neutral-300 group-hover:bg-neutral-900 transition-colors duration-200" />
+                <span className="relative">
+                  Läs mer om vårt upplägg
+                  <span 
+                    className="absolute bottom-0 left-0 right-0 h-px bg-neutral-300 transition-all duration-300 group-hover:scale-x-100 group-hover:bg-neutral-900"
+                    style={{ transform: 'scaleX(0)', transformOrigin: 'left' }}
                   />
-                  {/* Subtle gradient overlay when active */}
-                  {active === "operativt" && (
-                    <div className="pointer-events-none absolute inset-0 rounded-[28px] opacity-[0.03] bg-[rgb(var(--accent))]" />
-                  )}
-
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-xs font-medium tracking-widest text-neutral-500">{details.operativt.kicker}</p>
-                      <h3 className="mt-3 text-2xl font-semibold tracking-tight text-neutral-900">{details.operativt.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-neutral-700">{details.operativt.desc}</p>
-                    </div>
-
-                    <span
-                      className={[
-                        "rounded-full border px-3 py-1 text-xs transition",
-                        active === "operativt" ? badgeActive : badgeInactive,
-                      ].join(" ")}
-                    >
-                      {details.operativt.tag}
-                    </span>
-                  </div>
-
-                  <div className="mt-8 space-y-4">
-                    {details.operativt.bullets.map(([k, v], idx) => (
-                      <div key={k} className="group/item">
-                        <div className="flex items-start justify-between gap-6">
-                          <p className="text-sm text-neutral-600 transition-colors group-hover/item:text-neutral-700">{k}</p>
-                          <p className="text-sm font-medium text-neutral-900">{v}</p>
-                        </div>
-                        {idx !== details.operativt.bullets.length - 1 && (
-                          <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-neutral-200/70 to-transparent" />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-neutral-900">
-                    Visa detaljer <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-                  </div>
-                </button>
-              </TiltCard>
-            </Reveal>
-
-            <Reveal delayMs={120}>
-              <TiltCard>
-                <button
-                  type="button"
-                  onClick={() => setActive("utbildning")}
-                  className={[cardBase, cardShadow, active === "utbildning" ? cardActive : cardInactive].join(" ")}
-                >
-                  {/* Active indicator with gradient */}
-                  <div
-                    className={[
-                      "pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[rgb(var(--accent))] to-[rgb(var(--accent))]/60 transition-all duration-300",
-                      active === "utbildning" ? "opacity-100" : "opacity-0",
-                    ].join(" ")}
-                  />
-                  {/* Subtle gradient overlay when active */}
-                  {active === "utbildning" && (
-                    <div className="pointer-events-none absolute inset-0 rounded-[28px] opacity-[0.03] bg-[rgb(var(--accent))]" />
-                  )}
-
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-xs font-medium tracking-widest text-neutral-500">{details.utbildning.kicker}</p>
-                      <h3 className="mt-3 text-2xl font-semibold tracking-tight text-neutral-900">{details.utbildning.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-neutral-700">{details.utbildning.desc}</p>
-                    </div>
-
-                    <span
-                      className={[
-                        "rounded-full border px-3 py-1 text-xs transition",
-                        active === "utbildning" ? badgeActive : badgeInactive,
-                      ].join(" ")}
-                    >
-                      {details.utbildning.tag}
-                    </span>
-                  </div>
-
-                  <div className="mt-8 space-y-4">
-                    {details.utbildning.bullets.map(([k, v], idx) => (
-                      <div key={k} className="group/item">
-                        <div className="flex items-start justify-between gap-6">
-                          <p className="text-sm text-neutral-600 transition-colors group-hover/item:text-neutral-700">{k}</p>
-                          <p className="text-sm font-medium text-neutral-900">{v}</p>
-                        </div>
-                        {idx !== details.utbildning.bullets.length - 1 && (
-                          <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-neutral-200/70 to-transparent" />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-neutral-900">
-                    Visa detaljer <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-                  </div>
-                </button>
-              </TiltCard>
-            </Reveal>
+                </span>
+                <span className="text-xl transition-transform duration-200 group-hover:translate-x-1.5">→</span>
+              </a>
+            </div>
           </div>
 
-          {/* Details panel */}
-          <Reveal delayMs={140}>
-            <div className="relative mt-12 rounded-[28px] border border-neutral-200/80 bg-white/80 backdrop-blur p-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.20),0_0_0_1px_rgba(8,48,80,0.04)] sm:p-10">
-              {/* Subtle accent line at top */}
-              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[rgb(var(--accent))]/20 to-transparent" />
-              <div
-                key={active}
-                className={[
-                  "sb-swap will-change-transform",
-                  swapDir === "left" ? "sb-swap-left" : "sb-swap-right",
-                ].join(" ")}
-              >
-                <p className="text-xs font-medium tracking-widest text-neutral-500">{a.kicker}</p>
-
-                <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                  <h4 className="text-balance text-2xl font-semibold tracking-tight text-neutral-900">{a.panelTitle}</h4>
-                  <span className="text-sm text-neutral-600">{a.micro}</span>
-                </div>
-
-                <div className="mt-8 grid gap-6 lg:grid-cols-3">
-                  {a.steps.map(([t, p], i) => (
-                    <div key={t} className="group relative rounded-2xl border border-neutral-200/80 bg-white p-6 transition-all duration-300 hover:border-[rgb(var(--accent))]/30 hover:shadow-md">
-                      {/* Number badge with accent color */}
-                      <div className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full bg-[rgb(var(--accent))]/10 text-xs font-semibold text-[rgb(var(--accent))] transition-colors group-hover:bg-[rgb(var(--accent))]/15">
-                        {String(i + 1).padStart(2, "0")}
-                      </div>
-                      <p className="text-sm font-semibold text-neutral-900">{t}</p>
-                      <p className="mt-2 text-sm leading-relaxed text-neutral-600">{p}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Right Column - Services list */}
+          <div className="relative pt-2">
+            <div className="pl-8 md:pl-12">
+              {services.map((service, index) => (
+                <ServiceBlock key={service.number} service={service} index={index} />
+              ))}
             </div>
-          </Reveal>
-
-          <div className="mt-20 h-px w-full bg-neutral-200/70" />
+          </div>
         </div>
-      </section>
-
-      {/* page-level keyframes */}
-      <style>{`
-        @keyframes sb-swap-left {
-          0% { opacity: 0; transform: translateX(-14px); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes sb-swap-right {
-          0% { opacity: 0; transform: translateX(14px); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
-        .sb-swap-left { animation: sb-swap-left 320ms ease-out both; }
-        .sb-swap-right { animation: sb-swap-right 320ms ease-out both; }
-        @media (prefers-reduced-motion: reduce) {
-          .sb-swap-left, .sb-swap-right { animation: none !important; }
-        }
-      `}</style>
-    </main>
+      </div>
+    </section>
   );
 } 

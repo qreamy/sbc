@@ -35,7 +35,7 @@ export default function Book() {
       <section className="relative z-10 max-w-4xl mx-auto px-6 py-20 md:py-28">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-xs tracking-[0.18em] uppercase text-neutral-500">Boka</p>
-          <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight text-neutral-900">
+          <h1 className="mt-3 text-4xl md:text-5xl font-bold tracking-[-0.01em] leading-[0.95] text-neutral-900 font-[var(--font-general-sans)]">
             Boka ett samtal
           </h1>
           <p className="mt-6 text-neutral-700 leading-relaxed">

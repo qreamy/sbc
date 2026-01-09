@@ -12,7 +12,7 @@ export default function Services() {
     <main className="bg-neutral-950">
       <section className="max-w-6xl mx-auto px-6 py-20 md:py-28">
         <p className="text-xs tracking-[0.18em] uppercase text-white/50">Services</p>
-        <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">
+        <h1 className="mt-3 text-4xl md:text-5xl font-bold tracking-[-0.01em] leading-[0.95] font-[var(--font-general-sans)]">
           Outbound that converts — and scales.
         </h1>
         <p className="mt-6 max-w-2xl text-white/60 leading-relaxed">
@@ -47,7 +47,7 @@ export default function Services() {
             },
           ].map((s) => (
             <div key={s.title} className="rounded-2xl border border-white/10 bg-white/5 p-8">
-              <h2 className="text-lg font-semibold tracking-tight">{s.title}</h2>
+              <h2 className="text-lg font-semibold tracking-[-0.01em] leading-[1.15] font-[var(--font-general-sans)]">{s.title}</h2>
               <p className="mt-3 text-sm text-white/60 leading-relaxed">{s.text}</p>
             </div>
           ))}

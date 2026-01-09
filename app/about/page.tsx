@@ -11,7 +11,7 @@ export default function About() {
     <main className="bg-neutral-950">
       <section className="max-w-4xl mx-auto px-6 py-20 md:py-28">
         <p className="text-xs tracking-[0.18em] uppercase text-white/50">About</p>
-        <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">
+        <h1 className="mt-3 text-4xl md:text-5xl font-bold tracking-[-0.01em] leading-[0.95] font-[var(--font-general-sans)]">
           Premium outbound, done properly.
         </h1>
         <p className="mt-6 text-white/60 leading-relaxed">
@@ -22,14 +22,14 @@ export default function About() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-            <h2 className="font-semibold tracking-tight">How we think</h2>
+            <h2 className="font-semibold tracking-[-0.01em] leading-[1.15] font-[var(--font-general-sans)]">How we think</h2>
             <p className="mt-3 text-sm text-white/60 leading-relaxed">
               Outbound is a product. It needs positioning, QA, instrumentation, and iteration —
               not just activity.
             </p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-            <h2 className="font-semibold tracking-tight">How we operate</h2>
+            <h2 className="font-semibold tracking-[-0.01em] leading-[1.15] font-[var(--font-general-sans)]">How we operate</h2>
             <p className="mt-3 text-sm text-white/60 leading-relaxed">
               Weekly reporting, call reviews, script refinements, list hygiene, and conversion-based decisions.
             </p>
