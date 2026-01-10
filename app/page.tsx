@@ -332,6 +332,7 @@ type ServiceItem = {
 function ServiceBlock({ service, index }: { service: ServiceItem; index: number }) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.3, rootMargin: '-100px 0px' });
   const [isActive, setIsActive] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (inView) {
@@ -350,19 +351,46 @@ function ServiceBlock({ service, index }: { service: ServiceItem; index: number 
         transform: isActive ? 'translateY(0)' : 'translateY(4px)',
         transitionDelay: `${index * 80}ms`,
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="py-7 border-b border-neutral-200/50">
-        <div className="flex items-start gap-6">
-          <div className="flex-shrink-0 pt-1">
+      {/* Vertical axis line behind numbers */}
+      <div 
+        className="absolute left-0 top-0 bottom-0 w-px"
+        style={{
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.06) 10%, rgba(0,0,0,0.06) 90%, transparent 100%)',
+          opacity: isActive ? 1 : 0.3,
+          transition: 'opacity 700ms ease-out',
+        }}
+      />
+      
+      {/* Tiny left marker on hover */}
+      <div
+        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full transition-all duration-200"
+        style={{
+          background: isHovered ? 'rgba(0,0,0,0.4)' : 'transparent',
+          transform: isHovered ? 'translateY(-50%) translateX(-2px)' : 'translateY(-50%) translateX(0)',
+        }}
+      />
+
+      <div 
+        className="py-8 border-b border-neutral-200/40 transition-colors duration-200 cursor-default"
+        style={{
+          backgroundColor: isHovered ? 'rgba(0, 0, 0, 0.025)' : 'transparent',
+          paddingLeft: '24px',
+        }}
+      >
+        <div className="flex items-start gap-8">
+          <div className="flex-shrink-0 pt-1" style={{ width: '40px' }}>
             <span className="text-xs font-medium text-neutral-300 font-mono">
               {service.number}
             </span>
           </div>
           <div className="flex-1">
-            <h3 className="text-2xl sm:text-3xl font-semibold text-neutral-900 mb-3 leading-[1.1] font-[var(--font-general-sans)] tracking-[-0.01em]">
+            <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 leading-[1.15] font-[var(--font-general-sans)] tracking-[-0.02em]">
               {service.title}
             </h3>
-            <p className="text-sm text-neutral-500 leading-relaxed font-light max-w-lg">
+            <p className="text-base text-neutral-500 leading-[1.7] font-light max-w-lg" style={{ color: 'rgba(0, 0, 0, 0.5)' }}>
               {service.description}
             </p>
           </div>
@@ -401,12 +429,24 @@ function WhatWeDoSection() {
 
   return (
     <section id="vad" className="relative bg-neutral-50 overflow-hidden py-24 sm:py-32">
-      {/* Large typographic background - echo, not design */}
+      {/* Large typographic background - intentional framing with "EXECUTION" */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div 
+          className="absolute"
+          style={{ 
+            left: '50%',
+            top: '50%',
+            transform: 'translateX(-48%) translateY(-50%)',
+            filter: 'blur(0.5px)',
+          }}
+        >
           <span 
-            className="block text-[380px] sm:text-[500px] lg:text-[620px] font-normal text-neutral-900 whitespace-nowrap"
-            style={{ opacity: 0.04, fontFamily: 'var(--font-inter)' }}
+            className="block text-[400px] sm:text-[520px] lg:text-[640px] font-normal text-neutral-900 whitespace-nowrap font-[var(--font-general-sans)]"
+            style={{ 
+              opacity: 0.055, 
+              letterSpacing: '-0.015em',
+              fontWeight: 300,
+            }}
           >
             EXECUTION
           </span>
@@ -425,10 +465,10 @@ function WhatWeDoSection() {
                 transform: titleInView ? 'translateY(0)' : 'translateY(12px)',
               }}
             >
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.01em] leading-[0.90] max-w-xl font-[var(--font-general-sans)]">
-                <span className="text-neutral-900">Vi bygger försäljning</span>
-                <span className="block text-neutral-600 mt-2">som håller</span>
-                <span className="block text-neutral-600">över tid.</span>
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.94] max-w-[32rem] font-[var(--font-general-sans)]">
+                <span className="text-neutral-900 block tracking-[-0.03em]">Vi bygger försäljning</span>
+                <span className="block text-neutral-900 mt-2 tracking-[-0.03em]">som håller</span>
+                <span className="block text-neutral-500 mt-2 tracking-[-0.02em] font-semibold">över tid.</span>
               </h2>
             </div>
 
@@ -440,14 +480,14 @@ function WhatWeDoSection() {
                 transform: textInView ? 'translateY(0)' : 'translateY(12px)',
               }}
             >
-              <p className="text-lg text-neutral-700 leading-relaxed max-w-lg">
+              <p className="text-lg leading-[1.7] max-w-[50ch]" style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
                 Southbase tar operativt ansvar för försäljning – från struktur och process till ledarskap och genomförande.
               </p>
             </div>
 
-            {/* CTA - decision, not navigation */}
+            {/* Premium editorial CTA */}
             <div
-              className="mt-12 transition-all duration-700 ease-out delay-200"
+              className="mt-14 transition-all duration-700 ease-out delay-200"
               style={{
                 opacity: textInView ? 1 : 0,
                 transform: textInView ? 'translateY(0)' : 'translateY(12px)',
@@ -455,24 +495,33 @@ function WhatWeDoSection() {
             >
               <a
                 href="/services"
-                className="group flex items-center gap-4 text-lg font-medium text-neutral-700 transition-all duration-200 hover:text-neutral-900"
+                className="group flex items-center gap-4 text-lg font-medium text-neutral-600 transition-all duration-300 hover:text-neutral-900"
               >
-                <div className="w-px h-8 bg-neutral-300 group-hover:bg-neutral-900 transition-colors duration-200" />
+                <div 
+                  className="w-px bg-neutral-300 transition-all duration-300 group-hover:bg-neutral-900"
+                  style={{ height: '36px' }}
+                />
                 <span className="relative">
                   Läs mer om vårt upplägg
                   <span 
-                    className="absolute bottom-0 left-0 right-0 h-px bg-neutral-300 transition-all duration-300 group-hover:scale-x-100 group-hover:bg-neutral-900"
-                    style={{ transform: 'scaleX(0)', transformOrigin: 'left' }}
+                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-neutral-900 transition-all duration-300 group-hover:scale-x-100 group-hover:opacity-100"
+                    style={{ 
+                      transform: 'scaleX(0)', 
+                      transformOrigin: 'left',
+                      opacity: 0,
+                    }}
                   />
                 </span>
-                <span className="text-xl transition-transform duration-200 group-hover:translate-x-1.5">→</span>
+                <span className="text-xl transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
               </a>
             </div>
           </div>
 
-          {/* Right Column - Services list */}
+          {/* Right Column - Framework list */}
           <div className="relative pt-2">
-            <div className="pl-8 md:pl-12">
+            <div className="pl-12 md:pl-16">
               {services.map((service, index) => (
                 <ServiceBlock key={service.number} service={service} index={index} />
               ))}
