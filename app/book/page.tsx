@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Boka ett samtal — Southbase",
@@ -44,7 +43,11 @@ export default function Book() {
         </div>
 
         <div className="mt-12 max-w-2xl mx-auto">
-          <ContactForm />
+          <div className="rounded-2xl border border-neutral-200/80 bg-white/70 backdrop-blur p-8 md:p-10 text-center">
+            <p className="text-neutral-600 leading-relaxed">
+              Använd Cal.com-widgeten nedan för att boka ett samtal med oss.
+            </p>
+          </div>
         </div>
       </section>
 
