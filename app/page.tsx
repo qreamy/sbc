@@ -169,36 +169,42 @@ export default function HomePage() {
       <section className="relative overflow-hidden min-h-[100svh]">
         {/* Background Layer - unified surface */}
         <div className="pointer-events-none absolute inset-0 z-0">
-          {/* Background Image */}
+          {/* Background Image - more subtle and atmospheric */}
           <Image
             src="/hero-background.jpg"
             alt=""
             fill
             priority
-            quality={85}
+            quality={90}
             className="object-cover z-0"
-            style={{ opacity: 0.5 }}
+            style={{ opacity: 0.42 }}
             sizes="100vw"
           />
           
-          {/* Subtle overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/50 to-white/40 z-[1]" />
+          {/* Enhanced overlay for improved contrast and legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/58 to-white/45 z-[1]" />
           
-          {/* Soft vignette */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.02)_100%)] z-[2]" />
+          {/* Subtle gradient overlay for depth */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.15)_40%,rgba(255,255,255,0.25)_70%,rgba(255,255,255,0.35)_100%)] z-[2]" />
+          
+          {/* Soft vignette for focus */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_0%,rgba(0,0,0,0.015)_60%,rgba(0,0,0,0.03)_100%)] z-[3]" />
         </div>
 
         {/* Content Layer - with padding-top to avoid navbar */}
-        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-24 pt-28 sm:pt-32 lg:pt-36">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mt-8">
-              <h1 className="text-balance text-4xl font-bold tracking-[-0.01em] leading-[0.95] sm:text-6xl max-w-2xl mx-auto font-[var(--font-general-sans)]">
-                <span className="text-neutral-900">{line1}</span>
-                <span className="block text-neutral-600 mt-1">{line2}</span>
+        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-32 pt-32 sm:pt-40 lg:pt-48">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="mt-4">
+              {/* Primary headline - unmistakably primary and confident */}
+              <h1 className="text-balance text-5xl font-bold tracking-[-0.02em] leading-[1.05] sm:text-7xl lg:text-8xl max-w-4xl mx-auto font-[var(--font-general-sans)] mb-5">
+                <span className="text-neutral-900 block">{line1}</span>
+                {/* Secondary line - supportive, not equal */}
+                <span className="block text-neutral-500 mt-3 text-4xl sm:text-5xl lg:text-6xl font-medium tracking-[-0.015em] leading-[1.08]">{line2}</span>
               </h1>
 
+              {/* Descriptive paragraph - more breathing room */}
               <p
-                className={`mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-neutral-700 sm:text-lg transition-opacity duration-700 ease-out ${
+                className={`mx-auto mt-10 max-w-2xl text-pretty text-base leading-[1.75] text-neutral-600 sm:text-lg transition-opacity duration-700 ease-out ${
                   paragraphVisible ? "opacity-100" : "opacity-0"
                 }`}
               >
@@ -206,53 +212,64 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              {/* Primary CTA - Dark Frosted */}
+            {/* CTAs with improved spacing and premium treatment */}
+            <div className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
+              {/* Primary CTA - More decisive and premium */}
               <a
                 href="/book"
-                className="group inline-flex h-11 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/20 focus-visible:ring-offset-2"
+                className="group relative inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-4"
                 style={{
-                  background: 'rgba(0, 0, 0, 0.55)',
-                  backdropFilter: 'blur(12px) saturate(140%)',
-                  WebkitBackdropFilter: 'blur(12px) saturate(140%)',
-                  border: '1px solid rgba(255, 255, 255, 0.14)',
-                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)'
+                  background: 'rgba(0, 0, 0, 0.75)',
+                  backdropFilter: 'blur(16px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1)',
+                  letterSpacing: '0.01em',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.85)';
                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.boxShadow = '0 6px 24px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.12)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.55)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.14)';
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.75)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1)';
                 }}
               >
                 Boka ett samtal
-                <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </a>
 
-              {/* Secondary CTA - Light Frosted */}
+              {/* Secondary CTA - Quieter but clearly interactive */}
               <a
                 href="#vad"
-                className="group inline-flex h-11 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold text-neutral-900 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/20 focus-visible:ring-offset-2"
+                className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-sm font-medium text-neutral-700 transition-all duration-300 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-300/50 focus-visible:ring-offset-4"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.55)',
+                  background: 'rgba(255, 255, 255, 0.48)',
                   backdropFilter: 'blur(12px) saturate(140%)',
                   WebkitBackdropFilter: 'blur(12px) saturate(140%)',
-                  border: '1px solid rgba(0, 0, 0, 0.08)',
-                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
+                  border: '1px solid rgba(0, 0, 0, 0.06)',
+                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.04)',
+                  letterSpacing: '0.005em',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.70)';
-                  e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.12)';
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.68)';
+                  e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.1)';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.08)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.55)';
-                  e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.48)';
+                  e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.06)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.04)';
                 }}
               >
                 Se hur vi jobbar
-                <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1 opacity-70 group-hover:opacity-100">→</span>
               </a>
             </div>
 
@@ -329,8 +346,8 @@ type ServiceItem = {
   description: string;
 };
 
-function ServiceBlock({ service, index }: { service: ServiceItem; index: number }) {
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.3, rootMargin: '-100px 0px' });
+function ServiceBlock({ service, index, isLast }: { service: ServiceItem; index: number; isLast?: boolean }) {
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.25, rootMargin: '-80px 0px' });
   const [isActive, setIsActive] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -345,52 +362,71 @@ function ServiceBlock({ service, index }: { service: ServiceItem; index: number 
   return (
     <div
       ref={ref}
-      className="relative transition-all duration-700 ease-out"
+      className="relative transition-all duration-800 ease-out"
       style={{
-        opacity: isActive ? 1 : 0.4,
-        transform: isActive ? 'translateY(0)' : 'translateY(4px)',
-        transitionDelay: `${index * 80}ms`,
+        opacity: isActive ? 1 : 0.35,
+        transform: isActive ? 'translateY(0)' : 'translateY(6px)',
+        transitionDelay: `${index * 100}ms`,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Vertical axis line behind numbers */}
-      <div 
-        className="absolute left-0 top-0 bottom-0 w-px"
-        style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.06) 10%, rgba(0,0,0,0.06) 90%, transparent 100%)',
-          opacity: isActive ? 1 : 0.3,
-          transition: 'opacity 700ms ease-out',
-        }}
-      />
+      {/* Vertical guide line - more refined, stop before last item */}
+      {!isLast && (
+        <div 
+          className="absolute left-[21px] top-0 bottom-0 w-[1px]"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.04) 8%, rgba(0,0,0,0.04) 92%, transparent 100%)',
+            opacity: isActive ? 1 : 0.25,
+            transition: 'opacity 800ms ease-out',
+          }}
+        />
+      )}
       
-      {/* Tiny left marker on hover */}
+      {/* Deliberate number marker - systemized */}
       <div
-        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full transition-all duration-200"
-        style={{
-          background: isHovered ? 'rgba(0,0,0,0.4)' : 'transparent',
-          transform: isHovered ? 'translateY(-50%) translateX(-2px)' : 'translateY(-50%) translateX(0)',
-        }}
-      />
+        className="absolute left-0 top-9 w-12 flex items-center justify-start"
+      >
+        <span 
+          className="text-xs font-semibold font-mono tracking-[0.08em] transition-colors duration-300"
+          style={{
+            color: isHovered ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.25)',
+            fontSize: '11px',
+            letterSpacing: '0.1em',
+          }}
+        >
+          {service.number}
+        </span>
+      </div>
 
+      {/* Content block - clearer structure */}
       <div 
-        className="py-8 border-b border-neutral-200/40 transition-colors duration-200 cursor-default"
+        className={`py-10 transition-all duration-300 cursor-default ${isLast ? '' : 'border-b border-neutral-200/35'}`}
         style={{
-          backgroundColor: isHovered ? 'rgba(0, 0, 0, 0.025)' : 'transparent',
-          paddingLeft: '24px',
+          backgroundColor: isHovered ? 'rgba(0, 0, 0, 0.018)' : 'transparent',
+          paddingLeft: isHovered ? '72px' : '68px',
+          marginLeft: '0',
         }}
       >
-        <div className="flex items-start gap-8">
-          <div className="flex-shrink-0 pt-1" style={{ width: '40px' }}>
-            <span className="text-xs font-medium text-neutral-300 font-mono">
-              {service.number}
-            </span>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 leading-[1.15] font-[var(--font-general-sans)] tracking-[-0.02em]">
+        <div className="flex items-start gap-0">
+          <div className="flex-1 max-w-[540px]">
+            {/* Heading - stronger contrast */}
+            <h3 
+              className="text-2xl sm:text-3xl lg:text-[2rem] font-bold text-neutral-900 mb-4 leading-[1.18] font-[var(--font-general-sans)] tracking-[-0.025em] transition-colors duration-300"
+              style={{
+                color: isHovered ? 'rgba(0, 0, 0, 0.95)' : 'rgba(0, 0, 0, 0.9)',
+              }}
+            >
               {service.title}
             </h3>
-            <p className="text-base text-neutral-500 leading-[1.7] font-light max-w-lg" style={{ color: 'rgba(0, 0, 0, 0.5)' }}>
+            {/* Description - calmer and more readable */}
+            <p 
+              className="text-[15px] sm:text-base leading-[1.75] font-normal max-w-lg transition-colors duration-300"
+              style={{ 
+                color: isHovered ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.52)',
+                lineHeight: '1.75',
+              }}
+            >
               {service.description}
             </p>
           </div>
@@ -453,77 +489,75 @@ function WhatWeDoSection() {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6">
-        <div className="grid md:grid-cols-2 gap-16 lg:gap-20 items-start">
-          {/* Left Column - Headline & Intro */}
-          <div className="space-y-10">
+      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="grid md:grid-cols-2 gap-20 lg:gap-24 xl:gap-28 items-start">
+          {/* Left Column - Bold narrative & positioning */}
+          <div className="space-y-12 md:sticky md:top-24 md:max-h-[calc(100vh-8rem)]">
             <div
               ref={titleRef}
-              className="transition-all duration-700 ease-out"
+              className="transition-all duration-800 ease-out"
               style={{
                 opacity: titleInView ? 1 : 0,
-                transform: titleInView ? 'translateY(0)' : 'translateY(12px)',
+                transform: titleInView ? 'translateY(0)' : 'translateY(14px)',
               }}
             >
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.94] max-w-[32rem] font-[var(--font-general-sans)]">
-                <span className="text-neutral-900 block tracking-[-0.03em]">Vi bygger försäljning</span>
-                <span className="block text-neutral-900 mt-2 tracking-[-0.03em]">som håller</span>
-                <span className="block text-neutral-500 mt-2 tracking-[-0.02em] font-semibold">över tid.</span>
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[4.5rem] font-bold leading-[0.95] max-w-[36rem] font-[var(--font-general-sans)]">
+                <span className="text-neutral-900 block tracking-[-0.03em] mb-1">Vi bygger försäljning</span>
+                <span className="block text-neutral-900 mt-1 tracking-[-0.03em]">som håller</span>
+                <span className="block text-neutral-500 mt-2 tracking-[-0.02em] font-medium text-4xl sm:text-5xl lg:text-6xl xl:text-[3.5rem]">över tid.</span>
               </h2>
             </div>
 
             <div
               ref={textRef}
-              className="transition-all duration-700 ease-out delay-100"
+              className="transition-all duration-800 ease-out delay-150"
               style={{
                 opacity: textInView ? 1 : 0,
-                transform: textInView ? 'translateY(0)' : 'translateY(12px)',
+                transform: textInView ? 'translateY(0)' : 'translateY(14px)',
               }}
             >
-              <p className="text-lg leading-[1.7] max-w-[50ch]" style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
+              <p className="text-lg sm:text-xl leading-[1.75] max-w-[52ch] font-normal" style={{ color: 'rgba(0, 0, 0, 0.68)' }}>
                 Southbase tar operativt ansvar för försäljning – från struktur och process till ledarskap och genomförande.
               </p>
             </div>
 
-            {/* Premium editorial CTA */}
+            {/* Premium editorial CTA - refined */}
             <div
-              className="mt-14 transition-all duration-700 ease-out delay-200"
+              className="pt-2 transition-all duration-800 ease-out delay-300"
               style={{
                 opacity: textInView ? 1 : 0,
-                transform: textInView ? 'translateY(0)' : 'translateY(12px)',
+                transform: textInView ? 'translateY(0)' : 'translateY(14px)',
               }}
             >
               <a
                 href="/services"
-                className="group flex items-center gap-4 text-lg font-medium text-neutral-600 transition-all duration-300 hover:text-neutral-900"
+                className="group relative inline-flex items-center gap-4 text-base font-medium text-neutral-600 transition-colors duration-300 hover:text-neutral-900"
               >
                 <div 
-                  className="w-px bg-neutral-300 transition-all duration-300 group-hover:bg-neutral-900"
-                  style={{ height: '36px' }}
+                  className="w-[1px] bg-neutral-300 transition-all duration-300 group-hover:bg-neutral-900 group-hover:w-[2px]"
+                  style={{ height: '40px' }}
                 />
-                <span className="relative">
+                <span className="relative pb-0.5 inline-block">
                   Läs mer om vårt upplägg
-                  <span 
-                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-neutral-900 transition-all duration-300 group-hover:scale-x-100 group-hover:opacity-100"
-                    style={{ 
-                      transform: 'scaleX(0)', 
-                      transformOrigin: 'left',
-                      opacity: 0,
-                    }}
-                  />
+                  <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-neutral-900 origin-left transition-all duration-400 ease-out scale-x-0 group-hover:scale-x-100 opacity-0 group-hover:opacity-100" />
                 </span>
-                <span className="text-xl transition-transform duration-300 group-hover:translate-x-1">
+                <span className="text-xl transition-all duration-300 group-hover:translate-x-1.5 opacity-70 group-hover:opacity-100">
                   →
                 </span>
               </a>
             </div>
           </div>
 
-          {/* Right Column - Framework list */}
-          <div className="relative pt-2">
-            <div className="pl-12 md:pl-16">
+          {/* Right Column - Structured, scannable delivery */}
+          <div className="relative pt-1">
+            <div className="pl-0 md:pl-4">
               {services.map((service, index) => (
-                <ServiceBlock key={service.number} service={service} index={index} />
+                <ServiceBlock 
+                  key={service.number} 
+                  service={service} 
+                  index={index} 
+                  isLast={index === services.length - 1}
+                />
               ))}
             </div>
           </div>
