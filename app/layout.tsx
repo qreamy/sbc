@@ -10,6 +10,34 @@ export const metadata: Metadata = {
   title: "Southbase — Försäljning som fungerar i praktiken",
   description:
     "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering. Boka ett samtal.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
+  openGraph: {
+    title: "Southbase — Försäljning som fungerar i praktiken",
+    description:
+      "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering. Boka ett samtal.",
+    type: "website",
+    locale: "sv_SE",
+    siteName: "Southbase",
+    images: [
+      {
+        url: "/icon.svg",
+        width: 499,
+        height: 500,
+        alt: "Southbase",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Southbase — Försäljning som fungerar i praktiken",
+    description:
+      "Southbase driver försäljning på uppdrag för nordiska bolag – från genomförande till optimering.",
+    images: ["/icon.svg"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -44,8 +72,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href="/book"
                 className="
                   no-underline inline-flex items-center justify-center rounded-full
-                  bg-[rgb(var(--accent))] px-7 py-3 text-sm font-medium text-white
-                  hover:bg-[rgb(var(--accent))]/90 transition
+                  bg-neutral-900 px-7 py-3 text-sm font-medium text-white
+                  hover:bg-neutral-800 transition
                 "
               >
                 Kontakta oss
