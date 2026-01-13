@@ -171,7 +171,7 @@ export default function HomePage() {
         <div className="pointer-events-none absolute inset-0 z-0">
           {/* Background Image - more subtle and atmospheric */}
           <Image
-            src="/hero-background.jpg"
+            src="/hero-background.jpeg"
             alt=""
             fill
             priority
