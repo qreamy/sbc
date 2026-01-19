@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import Image from "next/image";
 
 /* ================= TYPEWRITER ================= */
@@ -164,7 +164,7 @@ export default function HomePage() {
 
 
   return (
-    <main className="text-neutral-900">
+    <main className="text-neutral-900" role="main">
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden min-h-[100svh]">
         {/* Background Layer - unified surface */}
@@ -177,18 +177,18 @@ export default function HomePage() {
             priority
             quality={90}
             className="object-cover z-0"
-            style={{ opacity: 0.42 }}
+            style={{ opacity: 0.42, filter: 'grayscale(100%)' }}
             sizes="100vw"
           />
           
           {/* Enhanced overlay for improved contrast and legibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/58 to-white/45 z-[1]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/65 to-white/50 z-[1]" />
           
           {/* Subtle gradient overlay for depth */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.15)_40%,rgba(255,255,255,0.25)_70%,rgba(255,255,255,0.35)_100%)] z-[2]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.2)_40%,rgba(255,255,255,0.3)_70%,rgba(255,255,255,0.4)_100%)] z-[2]" />
           
           {/* Soft vignette for focus */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_0%,rgba(0,0,0,0.015)_60%,rgba(0,0,0,0.03)_100%)] z-[3]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_0%,rgba(0,0,0,0.02)_60%,rgba(0,0,0,0.04)_100%)] z-[3]" />
         </div>
 
         {/* Content Layer - with padding-top to avoid navbar */}
@@ -196,15 +196,15 @@ export default function HomePage() {
           <div className="mx-auto max-w-4xl text-center">
             <div className="mt-4">
               {/* Primary headline - unmistakably primary and confident */}
-              <h1 className="text-balance text-5xl font-bold tracking-[-0.02em] leading-[1.05] sm:text-7xl lg:text-8xl max-w-4xl mx-auto font-[var(--font-general-sans)] mb-5">
+              <h1 className="text-balance text-5xl font-semibold tracking-[-0.02em] leading-[1.05] sm:text-7xl lg:text-8xl max-w-4xl mx-auto font-[var(--font-general-sans)] mb-5">
                 <span className="text-neutral-900 block">{line1}</span>
                 {/* Secondary line - supportive, not equal */}
                 <span className="block text-neutral-500 mt-3 text-4xl sm:text-5xl lg:text-6xl font-medium tracking-[-0.015em] leading-[1.08]">{line2}</span>
               </h1>
 
-              {/* Descriptive paragraph - more breathing room */}
+              {/* Descriptive paragraph - improved contrast */}
               <p
-                className={`mx-auto mt-10 max-w-2xl text-pretty text-base leading-[1.75] text-neutral-600 sm:text-lg transition-opacity duration-700 ease-out ${
+                className={`mx-auto mt-10 max-w-2xl text-pretty text-base leading-[1.75] text-neutral-700 sm:text-lg transition-opacity duration-700 ease-out ${
                   paragraphVisible ? "opacity-100" : "opacity-0"
                 }`}
               >
@@ -217,7 +217,7 @@ export default function HomePage() {
               {/* Primary CTA - More decisive and premium */}
               <a
                 href="/book"
-                className="group relative inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-4"
+                className="group relative inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-4"
                 style={{
                   background: 'rgba(0, 0, 0, 0.75)',
                   backdropFilter: 'blur(16px) saturate(180%)',
@@ -240,7 +240,7 @@ export default function HomePage() {
                 }}
               >
                 Boka ett samtal
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
               </a>
 
               {/* Secondary CTA - Quieter but clearly interactive */}
@@ -269,13 +269,13 @@ export default function HomePage() {
                 }}
               >
                 Se hur vi jobbar
-                <span className="transition-transform duration-300 group-hover:translate-x-1 opacity-70 group-hover:opacity-100">→</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1 opacity-70 group-hover:opacity-100" aria-hidden="true">→</span>
               </a>
             </div>
 
-            {/* LOGO MARQUEE */}
+            {/* LOGO MARQUEE - Improved visibility */}
             <div className="mt-16">
-              <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200/80 bg-white/80 backdrop-blur-sm px-8 py-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.20)]">
+              <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200 bg-white/95 backdrop-blur-sm px-8 py-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.20)]">
                 <div className="relative overflow-hidden">
                   <div className="sb-ticker flex w-max items-center gap-20 pr-20">
                     {marqueeItems.map((logo, idx) => (
@@ -285,7 +285,7 @@ export default function HomePage() {
                           alt={logo.alt}
                           width={120}
                           height={48}
-                          className="h-12 w-auto opacity-70 transition-opacity duration-300 hover:opacity-100 object-contain pointer-events-none"
+                          className="h-12 w-auto opacity-85 transition-opacity duration-300 hover:opacity-100 object-contain pointer-events-none"
                           style={{
                             transform: logo.scale ? `scale(${logo.scale})` : undefined,
                             transformOrigin: "center center",
@@ -335,6 +335,9 @@ export default function HomePage() {
 
       {/* ================= VAD VI GÖR ================= */}
       <WhatWeDoSection />
+
+      {/* ================= OM OSS ================= */}
+      <AboutUsSection />
     </main>
   );
 }
@@ -419,11 +422,11 @@ function ServiceBlock({ service, index, isLast }: { service: ServiceItem; index:
             >
               {service.title}
             </h3>
-            {/* Description - calmer and more readable */}
+            {/* Description - improved contrast */}
             <p 
-              className="text-[15px] sm:text-base leading-[1.75] font-normal max-w-lg transition-colors duration-300"
+              className="text-[15px] sm:text-base leading-[1.75] font-normal max-w-lg transition-colors duration-300 text-neutral-600"
               style={{ 
-                color: isHovered ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.52)',
+                color: isHovered ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.6)',
                 lineHeight: '1.75',
               }}
             >
@@ -464,7 +467,7 @@ function WhatWeDoSection() {
   const { ref: textRef, inView: textInView } = useInView<HTMLDivElement>({ threshold: 0.15 });
 
   return (
-    <section id="vad" className="relative bg-neutral-50 overflow-hidden py-24 sm:py-32">
+    <section id="vad" className="relative bg-neutral-50 overflow-hidden py-16 sm:py-20">
       {/* Large typographic background - intentional framing with "EXECUTION" */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div 
@@ -479,7 +482,7 @@ function WhatWeDoSection() {
           <span 
             className="block text-[400px] sm:text-[520px] lg:text-[640px] font-normal text-neutral-900 whitespace-nowrap font-[var(--font-general-sans)]"
             style={{ 
-              opacity: 0.055, 
+              opacity: 0.04, 
               letterSpacing: '-0.015em',
               fontWeight: 300,
             }}
@@ -490,9 +493,9 @@ function WhatWeDoSection() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid md:grid-cols-2 gap-20 lg:gap-24 xl:gap-28 items-start">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-start">
           {/* Left Column - Bold narrative & positioning */}
-          <div className="space-y-12 md:sticky md:top-24 md:max-h-[calc(100vh-8rem)]">
+          <div className="space-y-8 md:sticky md:top-24 md:max-h-[calc(100vh-8rem)]">
             <div
               ref={titleRef}
               className="transition-all duration-800 ease-out"
@@ -501,7 +504,7 @@ function WhatWeDoSection() {
                 transform: titleInView ? 'translateY(0)' : 'translateY(14px)',
               }}
             >
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[4.5rem] font-bold leading-[0.95] max-w-[36rem] font-[var(--font-general-sans)]">
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[4.5rem] font-semibold leading-[0.95] max-w-[36rem] font-[var(--font-general-sans)]">
                 <span className="text-neutral-900 block tracking-[-0.03em] mb-1">Vi bygger försäljning</span>
                 <span className="block text-neutral-900 mt-1 tracking-[-0.03em]">som håller</span>
                 <span className="block text-neutral-500 mt-2 tracking-[-0.02em] font-medium text-4xl sm:text-5xl lg:text-6xl xl:text-[3.5rem]">över tid.</span>
@@ -516,7 +519,7 @@ function WhatWeDoSection() {
                 transform: textInView ? 'translateY(0)' : 'translateY(14px)',
               }}
             >
-              <p className="text-lg sm:text-xl leading-[1.75] max-w-[52ch] font-normal" style={{ color: 'rgba(0, 0, 0, 0.68)' }}>
+              <p className="text-lg sm:text-xl leading-[1.75] max-w-[52ch] font-normal text-neutral-700">
                 Southbase tar operativt ansvar för försäljning – från struktur och process till ledarskap och genomförande.
               </p>
             </div>
@@ -531,7 +534,7 @@ function WhatWeDoSection() {
             >
               <a
                 href="/services"
-                className="group relative inline-flex items-center gap-4 text-base font-medium text-neutral-600 transition-colors duration-300 hover:text-neutral-900"
+                className="group relative inline-flex items-center gap-4 text-base font-medium text-neutral-600 transition-colors duration-300 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-2"
               >
                 <div 
                   className="w-[1px] bg-neutral-300 transition-all duration-300 group-hover:bg-neutral-900 group-hover:w-[2px]"
@@ -565,4 +568,158 @@ function WhatWeDoSection() {
       </div>
     </section>
   );
-} 
+}
+
+/* ================= OM OSS SECTION ================= */
+function AboutUsSection() {
+  const { ref: imageRef, inView: imageInView } = useInView<HTMLDivElement>({ threshold: 0.15 });
+  const { ref: contentRef, inView: contentInView } = useInView<HTMLDivElement>({ threshold: 0.15 });
+  
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+    
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return (
+    <section 
+      className="relative bg-white overflow-hidden"
+      aria-labelledby="about-us-heading"
+    >
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 py-20 sm:py-24 md:py-28 lg:py-32">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+          
+          {/* Image - spans 6 columns, larger visual anchor */}
+          <div 
+            ref={imageRef}
+            className="lg:col-span-6 relative order-2 lg:order-1"
+            style={prefersReducedMotion ? {} : {
+              opacity: imageInView ? 1 : 0,
+              transform: imageInView ? 'translateY(0)' : 'translateY(30px)',
+              transition: 'opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1)',
+            }}
+          >
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl sm:rounded-3xl" style={{ filter: 'grayscale(100%)' }}>
+              <Image
+                src="/P1013091.jpg"
+                alt="Team och människor bakom Southbase"
+                fill
+                className="object-cover"
+                style={{
+                  objectPosition: 'center',
+                }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 700px"
+                quality={95}
+                priority={false}
+              />
+              
+              {/* Subtle gradient overlay for depth */}
+              <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: 'linear-gradient(to bottom, rgba(0,0,0,0.02) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.03) 100%)',
+                }}
+              />
+
+              {/* Refined border and shadow */}
+              <div 
+                className="absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none"
+                style={{
+                  border: '2px solid rgba(0, 0, 0, 0.08)',
+                  boxShadow: `
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                    0 2px 4px rgba(0, 0, 0, 0.04),
+                    0 8px 24px rgba(0, 0, 0, 0.03),
+                    0 24px 64px rgba(0, 0, 0, 0.02)
+                  `,
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Content - spans 6 columns, offset right */}
+          <div 
+            ref={contentRef}
+            className="lg:col-span-6 order-1 lg:order-2 space-y-10"
+            style={prefersReducedMotion ? {} : {
+              opacity: contentInView ? 1 : 0,
+              transform: contentInView ? 'translateY(0)' : 'translateY(30px)',
+              transition: 'opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
+            }}
+          >
+            {/* Headline - matches process section size */}
+            <h2 
+              id="about-us-heading"
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-[4.5rem] font-semibold leading-[0.95] tracking-[-0.03em] font-[var(--font-general-sans)] text-neutral-900"
+            >
+              <span className="block tracking-[-0.03em] mb-1">Vi tar operativt</span>
+              <span className="block text-neutral-500 mt-2 tracking-[-0.03em] font-semibold text-5xl sm:text-6xl lg:text-7xl xl:text-[4.5rem]">ansvar.</span>
+            </h2>
+
+            {/* Body copy - flowing, editorial with credibility points */}
+            <div className="space-y-6 pt-4">
+              <p className="text-lg sm:text-xl leading-[1.75] font-normal text-neutral-700 max-w-[52ch]">
+                När ni väljer att arbeta med oss tar vi operativt ansvar för försäljningen. Vi driver, strukturerar och levererar – från första samtal till långsiktig affär.
+              </p>
+              
+              <p className="text-lg sm:text-xl leading-[1.75] font-normal text-neutral-700 max-w-[52ch]">
+                Vi har byggt och drivit försäljning i flera år. Vi vet vad som fungerar, vad som inte gör det, och när det är dags att justera. Det är den erfarenheten ni får.
+              </p>
+
+              {/* Credibility points */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-start gap-3">
+                  <span className="text-neutral-400 mt-1" aria-hidden="true">•</span>
+                  <p className="text-base sm:text-lg leading-[1.7] font-normal text-neutral-700 max-w-[48ch]">
+                    <strong className="font-semibold text-neutral-900">Mätbar pipeline</strong> – Tydlig uppföljning av leads, konverteringar och resultat.
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-neutral-400 mt-1" aria-hidden="true">•</span>
+                  <p className="text-base sm:text-lg leading-[1.7] font-normal text-neutral-700 max-w-[48ch]">
+                    <strong className="font-semibold text-neutral-900">Veckorapport</strong> – Regelbunden kommunikation om framsteg och justeringar.
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-neutral-400 mt-1" aria-hidden="true">•</span>
+                  <p className="text-base sm:text-lg leading-[1.7] font-normal text-neutral-700 max-w-[48ch]">
+                    <strong className="font-semibold text-neutral-900">Tydlig ansvarsfördelning</strong> – Vem gör vad, när och hur det mäts.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="pt-6">
+              <a
+                href="/book"
+                className="group relative inline-flex items-center gap-4 text-base font-medium text-neutral-600 transition-colors duration-300 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-2"
+              >
+                <div 
+                  className="w-[1px] bg-neutral-300 transition-all duration-300 group-hover:bg-neutral-900 group-hover:w-[2px]"
+                  style={{ height: '40px' }}
+                  aria-hidden="true"
+                />
+                <span className="relative pb-0.5 inline-block">
+                  Boka ett samtal
+                  <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-neutral-900 origin-left transition-all duration-400 ease-out scale-x-0 group-hover:scale-x-100 opacity-0 group-hover:opacity-100" />
+                </span>
+                <span className="text-xl transition-all duration-300 group-hover:translate-x-1.5 opacity-70 group-hover:opacity-100" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -65,11 +65,41 @@ export default function Navigation() {
     };
   }, [isOpen]);
 
+  // Handle smooth scroll with header offset
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href^="#"]') as HTMLAnchorElement;
+      if (!link) return;
+
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const id = href.slice(1);
+        const element = document.getElementById(id);
+        if (element) {
+          const headerHeight = 100; // Match HEADER_OFFSET
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+    return () => document.removeEventListener('click', handleAnchorClick);
+  }, []);
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[50] flex justify-center pt-4 transition-all duration-300 ${
         isScrolled ? "pt-3" : "pt-4"
       }`}
+      role="banner"
     >
       <nav
         className={`
@@ -110,8 +140,8 @@ export default function Navigation() {
           <button
             ref={buttonRef}
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-neutral-700 hover:text-neutral-900 transition-colors rounded-full hover:bg-white/50"
-            aria-label="Meny"
+            className="p-2 text-neutral-700 hover:text-neutral-900 transition-colors rounded-full hover:bg-white/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-2"
+            aria-label="Öppna meny"
             aria-expanded={isOpen}
             aria-controls="dropdown-menu"
           >
@@ -152,6 +182,7 @@ export default function Navigation() {
             hover:bg-black/65 active:scale-[0.98]
             border border-white/12
             font-[var(--font-general-sans)]
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2
             ${isScrolled ? "px-4 py-2 text-sm" : "px-5 py-2.5 text-sm"}
           `}
           style={{
@@ -171,7 +202,7 @@ export default function Navigation() {
           onClick={() => setIsOpen(false)}
         >
           Boka ett samtal
-          <span className="text-white">→</span>
+          <span className="text-white" aria-hidden="true">→</span>
         </Link>
 
         {/* Dropdown Menu - Separate rounded box below pill (Offmenu style) */}
@@ -198,7 +229,7 @@ export default function Navigation() {
           <div className="py-1.5">
             <Link
               href="/#vad"
-              className="block px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-black/4 transition-colors"
+              className="block px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-black/4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-inset"
               role="menuitem"
               onClick={() => setIsOpen(false)}
             >
@@ -207,7 +238,7 @@ export default function Navigation() {
             <div className="h-px bg-black/6 mx-2" />
             <Link
               href="/about"
-              className="block px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-black/4 transition-colors"
+              className="block px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-black/4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-inset"
               role="menuitem"
               onClick={() => setIsOpen(false)}
             >
