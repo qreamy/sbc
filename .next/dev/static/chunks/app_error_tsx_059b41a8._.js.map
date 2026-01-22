@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/poseidon/SBC/sbc/app/error.tsx"],"sourcesContent":["\"use client\";\n\nexport default function Error({\n  error,\n  reset,\n}: {\n  error: Error & { digest?: string };\n  reset: () => void;\n}) {\n  return (\n    <div className=\"flex min-h-screen flex-col items-center justify-center bg-neutral-50 px-6\">\n      <div className=\"max-w-md text-center\">\n        <h2 className=\"mb-4 text-2xl font-bold text-neutral-900\">\n          Något gick fel\n        </h2>\n        <p className=\"mb-6 text-neutral-600\">\n          Ett oväntat fel uppstod. Försök igen eller kontakta support om problemet kvarstår.\n        </p>\n        <button\n          onClick={reset}\n          className=\"rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800\"\n        >\n          Försök igen\n        </button>\n      </div>\n    </div>\n  );\n}\n\n\n"],"names":[],"mappings":";;;;;AAAA;;AAEe,SAAS,MAAM,EAC5B,KAAK,EACL,KAAK,EAIN;IACC,qBACE,6LAAC;QAAI,WAAU;kBACb,cAAA,6LAAC;YAAI,WAAU;;8BACb,6LAAC;oBAAG,WAAU;8BAA2C;;;;;;8BAGzD,6LAAC;oBAAE,WAAU;8BAAwB;;;;;;8BAGrC,6LAAC;oBACC,SAAS;oBACT,WAAU;8BACX;;;;;;;;;;;;;;;;;AAMT;KAzBwB"}}]
+}
