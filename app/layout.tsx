@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     url: "https://southbase.se",
     images: [
       {
-        url: "/icon.svg",
-        width: 574,
-        height: 574,
+        url: "/favicon-96x96.png",
+        width: 96,
+        height: 96,
         alt: "Southbase logotyp",
       },
     ],
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "Southbase — Försäljning som fungerar i praktiken",
     description:
       "Southbase tar operativt ansvar för telefonbaserad försäljning för nordiska bolag. Vi driver, strukturerar och levererar.",
-    images: ["/icon.svg"],
+    images: ["/favicon-96x96.png"],
   },
   robots: {
     index: true,
