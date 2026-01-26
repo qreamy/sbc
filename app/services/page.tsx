@@ -94,7 +94,7 @@ function ServiceCard({
 
       {/* Clean card */}
       <div
-        className="relative rounded-2xl border border-neutral-200 bg-white p-8 lg:p-10 transition-all duration-500"
+        className="relative rounded-xl sm:rounded-2xl border border-neutral-200 bg-white p-4 sm:p-6 md:p-8 lg:p-10 transition-all duration-500"
         style={{
           transform: isHovered 
             ? `translateY(-4px) scale(1.01)` 
@@ -105,22 +105,22 @@ function ServiceCard({
         }}
       >
         {/* Number and Title */}
-        <div className="flex items-start gap-6 mb-6">
-          <span className="text-xs font-semibold font-mono tracking-[0.12em] text-neutral-400 transition-colors duration-300 group-hover:text-neutral-600">
+        <div className="flex items-start gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-5 md:mb-6">
+          <span className="text-xs font-semibold font-mono tracking-[0.12em] text-neutral-400 transition-colors duration-300 group-hover:text-neutral-600 flex-shrink-0">
             {number}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] tracking-[-0.025em] font-[var(--font-general-sans)] text-neutral-900 transition-colors duration-300">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.15] tracking-[-0.025em] font-[var(--font-general-sans)] text-neutral-900 transition-colors duration-300">
             {title}
           </h2>
         </div>
 
         {/* Description */}
-        <p className="text-lg sm:text-xl leading-[1.75] font-normal text-neutral-800 max-w-2xl mb-8">
+        <p className="text-base sm:text-lg md:text-xl leading-[1.75] font-normal text-neutral-800 max-w-2xl mb-6 sm:mb-7 md:mb-8">
           {description}
         </p>
 
         {/* Details grid */}
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
           {details.map((detail, detailIndex) => (
             <div
               key={detailIndex}
@@ -229,14 +229,14 @@ export default function Services() {
         </div>
 
         {/* Content Layer - shortened */}
-        <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 sm:py-24">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 md:py-20 lg:py-24">
           <div className="mx-auto max-w-4xl text-center">
             <Reveal delayMs={100} y={20}>
               <div>
                 {/* Headline - all same font size */}
-                <h1 className="text-balance text-5xl font-semibold tracking-[-0.02em] leading-[1.05] sm:text-7xl lg:text-8xl max-w-4xl mx-auto font-[var(--font-general-sans)]">
+                <h1 className="text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-semibold tracking-[-0.02em] leading-[1.05] max-w-4xl mx-auto font-[var(--font-general-sans)] px-2 sm:px-0">
                   <span className="text-neutral-900 block">Vi bygger försäljning som håller</span>
-                  <span className="block text-neutral-900 mt-3">över tid.</span>
+                  <span className="block text-neutral-900 mt-2 sm:mt-3">över tid.</span>
                 </h1>
               </div>
             </Reveal>
@@ -245,7 +245,7 @@ export default function Services() {
       </section>
 
       {/* Services Grid - fade continues behind first card */}
-      <section className="relative py-20 sm:py-24 md:py-28 lg:py-32 bg-white">
+      <section className="relative py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-white">
         {/* Fade overlay that extends from hero section behind first service card */}
         <div
           className="pointer-events-none absolute inset-x-0 z-0"
@@ -256,8 +256,8 @@ export default function Services() {
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="space-y-12 sm:space-y-16">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
+          <div className="space-y-8 sm:space-y-12 md:space-y-16">
             {services.map((service, index) => (
               <Reveal key={service.number} delayMs={index * 150} y={30}>
                 <ServiceCard
@@ -274,15 +274,15 @@ export default function Services() {
       </section>
 
       {/* Value Proposition Section */}
-      <section className="bg-neutral-50 py-20 sm:py-24 md:py-28">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <section className="bg-neutral-50 py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
           <Reveal delayMs={0} y={20}>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-[-0.03em] font-[var(--font-general-sans)] text-neutral-900 max-w-3xl mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-[-0.03em] font-[var(--font-general-sans)] text-neutral-900 max-w-3xl mb-8 sm:mb-12 md:mb-16 px-2 sm:px-0">
               Så fungerar det
             </h2>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
             {[
               {
                 number: "1",
@@ -301,14 +301,14 @@ export default function Services() {
               },
             ].map((item, index) => (
               <Reveal key={index} delayMs={index * 100} y={30}>
-                <div className="group relative p-8 rounded-2xl border border-neutral-200 bg-white transition-all duration-500 hover:border-neutral-300 hover:shadow-lg">
-                  <div className="w-12 h-12 rounded-xl bg-neutral-900 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-white text-lg font-bold">{item.number}</span>
+                <div className="group relative p-6 sm:p-8 rounded-xl sm:rounded-2xl border border-neutral-200 bg-white transition-all duration-500 hover:border-neutral-300 hover:shadow-lg">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-neutral-900 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-white text-base sm:text-lg font-bold">{item.number}</span>
                   </div>
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-4">
+                  <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 mb-3 sm:mb-4">
                     {item.title}
                   </h3>
-                  <p className="text-base leading-relaxed text-neutral-700">
+                  <p className="text-sm sm:text-base leading-relaxed text-neutral-700">
                     {item.description}
                   </p>
                 </div>
@@ -319,41 +319,41 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 sm:py-24 md:py-28">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
           <Reveal delayMs={0} y={30}>
-            <div className="max-w-3xl mx-auto text-center space-y-8">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-[-0.03em] font-[var(--font-general-sans)] text-neutral-900">
+            <div className="max-w-3xl mx-auto text-center space-y-6 sm:space-y-8 px-2 sm:px-0">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[0.95] tracking-[-0.03em] font-[var(--font-general-sans)] text-neutral-900">
                 Redo att bygga försäljning som håller?
               </h2>
-              <p className="text-lg sm:text-xl leading-[1.75] font-normal text-neutral-800 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl leading-[1.75] font-normal text-neutral-800 max-w-2xl mx-auto">
                 Låt oss diskutera hur vi kan hjälpa er att bygga en försäljning som levererar resultat över tid.
               </p>
-              <div className="pt-4">
+              <div className="pt-2 sm:pt-4">
                 <Link
                   href="/book"
-                  className="group relative inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-sm font-semibold text-white transition-all duration-500 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-4"
+                  className="group relative inline-flex h-11 sm:h-12 items-center justify-center gap-2 sm:gap-2.5 rounded-full px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-white transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-4 w-full sm:w-auto"
                   style={{
-                    background: 'rgba(0, 0, 0, 0.85)',
-                    backdropFilter: 'blur(16px) saturate(180%)',
-                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1)',
+                    background: 'rgba(0, 0, 0, 0.65)',
+                    backdropFilter: 'blur(20px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                     letterSpacing: '0.01em',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.95)';
-                    e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
-                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12)';
+                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.75)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.85)';
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1)';
+                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
                   }}
                 >
                   Boka ett samtal
-                  <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
                 </Link>
               </div>
             </div>

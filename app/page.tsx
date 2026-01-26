@@ -161,26 +161,6 @@ export default function HomePage() {
   const paragraphText =
     "Southbase tar operativt ansvar för telefonbaserad försäljning — med struktur, kvalitet och tydlig uppföljning.";
 
-  const line1 = useTypewriter({ text: line1Text, speedMs: 34, startDelayMs: 220 });
-  const line2 = useTypewriter({
-    text: line2Text,
-    speedMs: 26,
-    startDelayMs: 220 + 34 * line1Text.length + 220,
-  });
-  
-  // Calculate when typewriter finishes for line2, then add delay for fade-in
-  const typewriterFinishTime = 220 + 34 * line1Text.length + 220 + 26 * line2Text.length;
-  const paragraphFadeInDelay = typewriterFinishTime + 300; // 300ms after typewriter finishes
-  
-  const [paragraphVisible, setParagraphVisible] = useState(false);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setParagraphVisible(true);
-    }, paragraphFadeInDelay);
-    return () => clearTimeout(timer);
-  }, [paragraphFadeInDelay]);
-
   const marqueeItems = useMemo(() => [...logos, ...logos], [logos]);
 
 
@@ -229,23 +209,19 @@ export default function HomePage() {
         </div>
 
         {/* Content Layer - with padding-top to avoid navbar */}
-        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-32 pt-32 sm:pt-40 lg:pt-48">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pb-20 sm:pb-32 pt-20 sm:pt-24 md:pt-28 lg:pt-32">
           <div className="mx-auto max-w-4xl text-center">
             <Reveal delayMs={100} y={20}>
-              <div className="mt-4">
+              <div className="mt-2 sm:mt-4">
               {/* Primary headline - unmistakably primary and confident */}
-              <h1 className="text-balance text-5xl font-semibold tracking-[-0.02em] leading-[1.05] sm:text-7xl lg:text-8xl max-w-4xl mx-auto font-[var(--font-general-sans)] mb-5">
-                <span className="text-neutral-900 block">{line1}</span>
+              <h1 className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold tracking-[-0.02em] leading-[1.05] max-w-4xl mx-auto font-[var(--font-general-sans)] mb-4 sm:mb-5 px-2 sm:px-0">
+                <span className="text-neutral-900 block">{line1Text}</span>
                 {/* Secondary line - increased size for better balance */}
-                <span className="block text-neutral-500 mt-4 text-5xl sm:text-6xl lg:text-7xl font-medium tracking-[-0.015em] leading-[1.08]">{line2}</span>
+                <span className="block text-neutral-500 mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-[-0.015em] leading-[1.08]">{line2Text}</span>
               </h1>
 
               {/* Descriptive paragraph - improved contrast */}
-              <p
-                className={`mx-auto mt-10 max-w-2xl text-pretty text-base leading-[1.75] text-neutral-800 sm:text-lg transition-opacity duration-700 ease-out ${
-                  paragraphVisible ? "opacity-100" : "opacity-0"
-                }`}
-              >
+              <p className="mx-auto mt-6 sm:mt-8 md:mt-10 max-w-2xl text-pretty text-sm sm:text-base md:text-lg leading-[1.75] text-neutral-800 px-4 sm:px-0">
                 {paragraphText}
               </p>
             </div>
@@ -253,43 +229,41 @@ export default function HomePage() {
 
             {/* CTAs with improved spacing and premium treatment */}
             <Reveal delayMs={800} y={15}>
-            <div className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
-              {/* Primary CTA - More decisive and premium */}
+            <div className="mt-8 sm:mt-12 md:mt-14 flex flex-row items-center justify-center gap-3 sm:gap-4 px-4 sm:px-0 flex-wrap">
+              {/* Primary CTA - Apple style with glass effect */}
               <a
                 href="/book"
-                className="group relative inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-sm font-semibold text-white transition-all duration-500 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-4"
+                className="group relative inline-flex h-11 sm:h-12 items-center justify-center gap-2 sm:gap-2.5 rounded-full px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-white transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-4"
                 style={{
-                  background: 'rgba(0, 0, 0, 0.75)',
-                  backdropFilter: 'blur(16px) saturate(180%)',
-                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1)',
+                  background: 'rgba(0, 0, 0, 0.65)',
+                  backdropFilter: 'blur(20px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                   letterSpacing: '0.01em',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.85)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)';
-                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
-                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12)';
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.75)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.75)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1)';
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
                 }}
               >
                 Boka ett samtal
-                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
               </a>
 
               {/* Secondary CTA - Text link style for clear hierarchy */}
               <a
                 href="#vad"
-                className="group relative inline-flex items-center gap-2 text-base font-medium text-neutral-600 transition-colors duration-300 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-300/50 focus-visible:ring-offset-4"
+                className="group relative inline-flex items-center gap-2 text-sm sm:text-base font-medium text-neutral-600 transition-colors duration-300 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-300/50 focus-visible:ring-offset-4"
               >
                 <span>Se hur vi jobbar</span>
-                <span className="text-lg transition-transform duration-300 group-hover:translate-x-1 opacity-60 group-hover:opacity-100" aria-hidden="true">→</span>
+                <span className="text-base sm:text-lg transition-transform duration-300 group-hover:translate-x-1 opacity-60 group-hover:opacity-100" aria-hidden="true">→</span>
                 <span className="absolute bottom-0 left-0 right-0 h-[1px] bg-neutral-300 origin-left transition-all duration-300 scale-x-0 group-hover:scale-x-100" />
               </a>
             </div>
@@ -297,13 +271,8 @@ export default function HomePage() {
 
             {/* LOGO MARQUEE - Improved visibility with subtle label */}
             <Reveal delayMs={600} y={20}>
-              <div className="mt-16">
-                <Reveal delayMs={650} y={10}>
-                  <p className="text-xs font-medium text-neutral-500 uppercase tracking-wider text-center mb-6">
-                    Vi arbetar med
-                  </p>
-                </Reveal>
-                <div className="mx-auto max-w-5xl rounded-3xl border border-neutral-200 bg-white/95 backdrop-blur-sm px-8 py-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.20)] transition-all duration-700 hover:shadow-[0_24px_72px_-40px_rgba(0,0,0,0.25)] hover:scale-[1.01]">
+              <div className="mt-10 sm:mt-14 md:mt-16 px-4 sm:px-0">
+                <div className="mx-auto max-w-5xl rounded-2xl sm:rounded-3xl border border-neutral-200 bg-white/95 backdrop-blur-sm px-4 sm:px-6 md:px-8 py-6 sm:py-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.20)] transition-all duration-700 hover:shadow-[0_24px_72px_-40px_rgba(0,0,0,0.25)] hover:scale-[1.01]">
                 <div className="relative overflow-hidden">
                   <div className="sb-ticker flex w-max items-center gap-20 pr-20">
                     {marqueeItems.map((logo, idx) => (
@@ -311,15 +280,18 @@ export default function HomePage() {
                         <Image
                           src={logo.src}
                           alt={logo.alt}
-                          width={120}
-                          height={48}
-                          className="h-12 w-auto opacity-85 transition-opacity duration-300 hover:opacity-100 object-contain pointer-events-none"
+                          width={240}
+                          height={96}
+                          quality={100}
+                          className="h-12 w-auto opacity-100 transition-opacity duration-300 hover:opacity-100 object-contain pointer-events-none"
                           style={{
                             transform: logo.scale ? `scale(${logo.scale})` : undefined,
                             transformOrigin: "center center",
                             maxHeight: "48px",
+                            filter: 'brightness(0.3) contrast(1.2)',
                           }}
-                          loading="lazy"
+                          loading={idx < 4 ? "eager" : "lazy"}
+                          unoptimized={false}
                         />
                       </div>
                     ))}
@@ -448,11 +420,11 @@ function ServiceBlock({ service, index, isLast }: { service: ServiceItem; index:
 
       {/* Content block - clearer structure with enhanced hover */}
       <div 
-        className={`py-10 transition-all duration-500 ease-out cursor-default rounded-xl ${isLast ? '' : 'border-b border-neutral-200/35'}`}
+        className={`py-6 sm:py-8 md:py-10 transition-all duration-500 ease-out cursor-default rounded-xl ${isLast ? '' : 'border-b border-neutral-200/35'}`}
         style={{
           backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.6)' : 'transparent',
-          transform: isHovered ? 'translateX(8px) scale(1.01)' : 'translateX(0) scale(1)',
-          paddingLeft: isHovered ? '72px' : '68px',
+          transform: isHovered ? 'translateX(4px) sm:translateX(8px) scale(1.01)' : 'translateX(0) scale(1)',
+          paddingLeft: isHovered ? '56px sm:72px' : '52px sm:68px',
           marginLeft: '0',
           boxShadow: isHovered ? '0 4px 12px rgba(0, 0, 0, 0.03)' : 'none',
         }}
@@ -461,7 +433,7 @@ function ServiceBlock({ service, index, isLast }: { service: ServiceItem; index:
           <div className="flex-1 max-w-[540px]">
             {/* Heading - stronger contrast */}
             <h3 
-              className="text-2xl sm:text-3xl lg:text-[2rem] font-bold text-neutral-900 mb-4 leading-[1.18] font-[var(--font-general-sans)] tracking-[-0.025em] transition-colors duration-300"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-bold text-neutral-900 mb-3 sm:mb-4 leading-[1.18] font-[var(--font-general-sans)] tracking-[-0.025em] transition-colors duration-300"
               style={{
                 color: isHovered ? 'rgba(0, 0, 0, 0.95)' : 'rgba(0, 0, 0, 0.9)',
               }}
@@ -470,7 +442,7 @@ function ServiceBlock({ service, index, isLast }: { service: ServiceItem; index:
             </h3>
             {/* Description - improved contrast and more compelling */}
             <p 
-              className="text-[15px] sm:text-base leading-[1.75] font-normal max-w-lg transition-colors duration-300 text-neutral-700"
+              className="text-sm sm:text-[15px] md:text-base leading-[1.75] font-normal max-w-lg transition-colors duration-300 text-neutral-700"
               style={{ 
                 color: isHovered ? 'rgba(0, 0, 0, 0.85)' : 'rgba(0, 0, 0, 0.7)',
                 lineHeight: '1.75',
@@ -521,7 +493,7 @@ function WhatWeDoSection() {
     <section 
       id="vad" 
       ref={sectionRef}
-      className="relative bg-neutral-50 overflow-hidden py-16 sm:py-20 transition-opacity duration-1000"
+      className="relative bg-neutral-50 overflow-hidden py-12 sm:py-16 md:py-20 transition-opacity duration-1000"
       style={{
         opacity: sectionInView ? 1 : 0.7,
       }}
@@ -570,7 +542,7 @@ function WhatWeDoSection() {
             }
           `}</style>
           <span 
-            className={`block text-[400px] sm:text-[520px] lg:text-[640px] font-normal text-neutral-900 whitespace-nowrap font-[var(--font-general-sans)] select-none ${bgTextInView ? 'bg-text-animated' : 'bg-text-hidden'}`}
+            className={`block text-[200px] sm:text-[300px] md:text-[400px] lg:text-[520px] xl:text-[640px] font-normal text-neutral-900 whitespace-nowrap font-[var(--font-general-sans)] select-none ${bgTextInView ? 'bg-text-animated' : 'bg-text-hidden'}`}
             style={{ 
               opacity: 0.08,
               letterSpacing: '-0.015em',
@@ -584,10 +556,10 @@ function WhatWeDoSection() {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-start">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-20 items-start">
           {/* Left Column - Bold narrative & positioning */}
-          <div className="space-y-8 md:sticky md:top-24 md:max-h-[calc(100vh-8rem)]">
+          <div className="space-y-6 sm:space-y-8 md:sticky md:top-24 md:max-h-[calc(100vh-8rem)]">
             <div
               ref={titleRef}
               className="transition-all duration-1000 ease-out"
@@ -596,7 +568,7 @@ function WhatWeDoSection() {
                 transform: titleInView ? 'translateY(0) translateX(0)' : 'translateY(20px) translateX(-10px)',
               }}
             >
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[4.5rem] font-semibold leading-[0.95] max-w-[36rem] font-[var(--font-general-sans)]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[4.5rem] font-semibold leading-[0.95] max-w-[36rem] font-[var(--font-general-sans)]">
                 <span className="text-neutral-900 block tracking-[-0.03em] mb-1">Vi bygger försäljning</span>
                 <span className="block text-neutral-900 mt-1 tracking-[-0.03em]">som håller</span>
                 <span className="block text-neutral-500 mt-2 tracking-[-0.03em] font-semibold">över tid.</span>
@@ -611,7 +583,7 @@ function WhatWeDoSection() {
                 transform: textInView ? 'translateY(0) translateX(0)' : 'translateY(20px) translateX(-10px)',
               }}
             >
-              <p className="text-lg sm:text-xl leading-[1.75] max-w-[52ch] font-normal text-neutral-800">
+              <p className="text-base sm:text-lg md:text-xl leading-[1.75] max-w-[52ch] font-normal text-neutral-800">
                 Southbase tar operativt ansvar för försäljning – från struktur och process till ledarskap och genomförande.
               </p>
             </div>
@@ -692,8 +664,8 @@ function AboutUsSection() {
         opacity: sectionInView ? 1 : 0.7,
       }}
     >
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 py-20 sm:py-24 md:py-28 lg:py-32">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
+        <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center">
           
           {/* Image - spans 6 columns, larger visual anchor */}
           <div 
@@ -746,7 +718,7 @@ function AboutUsSection() {
           {/* Content - spans 6 columns, offset right */}
           <div 
             ref={contentRef}
-            className="lg:col-span-6 order-1 lg:order-2 space-y-10"
+            className="lg:col-span-6 order-1 lg:order-2 space-y-6 sm:space-y-8 md:space-y-10"
             style={prefersReducedMotion ? {} : {
               opacity: contentInView ? 1 : 0,
               transform: contentInView ? 'translateY(0) translateX(0)' : 'translateY(40px) translateX(20px)',
@@ -756,58 +728,58 @@ function AboutUsSection() {
             {/* Headline - matches process section size */}
             <h2 
               id="about-us-heading"
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-[4.5rem] font-semibold leading-[0.95] tracking-[-0.03em] font-[var(--font-general-sans)] text-neutral-900"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[4.5rem] font-semibold leading-[0.95] tracking-[-0.03em] font-[var(--font-general-sans)] text-neutral-900"
             >
               <Reveal delayMs={300} y={15}>
                 <span className="block tracking-[-0.03em] mb-1">Vi tar operativt</span>
               </Reveal>
               <Reveal delayMs={450} y={15}>
-                <span className="block text-neutral-500 mt-2 tracking-[-0.03em] font-semibold text-5xl sm:text-6xl lg:text-7xl xl:text-[4.5rem]">ansvar.</span>
+                <span className="block text-neutral-500 mt-2 tracking-[-0.03em] font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[4.5rem]">ansvar.</span>
               </Reveal>
             </h2>
 
             {/* Body copy - flowing, editorial with credibility points */}
-            <div className="space-y-6 pt-4">
+            <div className="space-y-4 sm:space-y-6 pt-2 sm:pt-4">
               <Reveal delayMs={600} y={12}>
-                <p className="text-lg sm:text-xl leading-[1.75] font-normal text-neutral-800 max-w-[52ch]">
+                <p className="text-base sm:text-lg md:text-xl leading-[1.75] font-normal text-neutral-800 max-w-[52ch]">
                   När ni väljer att arbeta med oss tar vi operativt ansvar för försäljningen. Vi driver, strukturerar och levererar – från första samtal till långsiktig affär.
                 </p>
               </Reveal>
               
               <Reveal delayMs={750} y={12}>
-                <p className="text-lg sm:text-xl leading-[1.75] font-normal text-neutral-800 max-w-[52ch]">
+                <p className="text-base sm:text-lg md:text-xl leading-[1.75] font-normal text-neutral-800 max-w-[52ch]">
                   Vi har byggt och drivit försäljning i flera år. Vi vet vad som fungerar, vad som inte gör det, och när det är dags att justera. Det är den erfarenheten ni får.
                 </p>
               </Reveal>
 
               {/* Credibility points - enhanced with subtle visual markers */}
-              <div className="space-y-4 pt-2">
+              <div className="space-y-3 sm:space-y-4 pt-2">
                 <Reveal delayMs={900} y={10}>
-                  <div className="flex items-start gap-4 group">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-neutral-100 group-hover:bg-neutral-200 transition-all duration-300 flex items-center justify-center mt-0.5 group-hover:scale-110">
-                      <span className="text-[10px] font-semibold text-neutral-600 transition-transform duration-300 group-hover:scale-110">✓</span>
+                  <div className="flex items-start gap-3 sm:gap-4 group">
+                    <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-neutral-100 group-hover:bg-neutral-200 transition-all duration-300 flex items-center justify-center mt-0.5 group-hover:scale-110">
+                      <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-600 transition-transform duration-300 group-hover:scale-110">✓</span>
                     </div>
-                    <p className="text-base sm:text-lg leading-[1.7] font-normal text-neutral-800 max-w-[48ch]">
+                    <p className="text-sm sm:text-base md:text-lg leading-[1.7] font-normal text-neutral-800 max-w-[48ch]">
                       <strong className="font-semibold text-neutral-900">Mätbar pipeline</strong> – Tydlig uppföljning av leads, konverteringar och resultat.
                     </p>
                   </div>
                 </Reveal>
                 <Reveal delayMs={1050} y={10}>
-                  <div className="flex items-start gap-4 group">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-neutral-100 group-hover:bg-neutral-200 transition-all duration-300 flex items-center justify-center mt-0.5 group-hover:scale-110">
-                      <span className="text-[10px] font-semibold text-neutral-600 transition-transform duration-300 group-hover:scale-110">✓</span>
+                  <div className="flex items-start gap-3 sm:gap-4 group">
+                    <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-neutral-100 group-hover:bg-neutral-200 transition-all duration-300 flex items-center justify-center mt-0.5 group-hover:scale-110">
+                      <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-600 transition-transform duration-300 group-hover:scale-110">✓</span>
                     </div>
-                    <p className="text-base sm:text-lg leading-[1.7] font-normal text-neutral-800 max-w-[48ch]">
+                    <p className="text-sm sm:text-base md:text-lg leading-[1.7] font-normal text-neutral-800 max-w-[48ch]">
                       <strong className="font-semibold text-neutral-900">Veckorapport</strong> – Regelbunden kommunikation om framsteg och justeringar.
                     </p>
                   </div>
                 </Reveal>
                 <Reveal delayMs={1200} y={10}>
-                  <div className="flex items-start gap-4 group">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-neutral-100 group-hover:bg-neutral-200 transition-all duration-300 flex items-center justify-center mt-0.5 group-hover:scale-110">
-                      <span className="text-[10px] font-semibold text-neutral-600 transition-transform duration-300 group-hover:scale-110">✓</span>
+                  <div className="flex items-start gap-3 sm:gap-4 group">
+                    <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-neutral-100 group-hover:bg-neutral-200 transition-all duration-300 flex items-center justify-center mt-0.5 group-hover:scale-110">
+                      <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-600 transition-transform duration-300 group-hover:scale-110">✓</span>
                     </div>
-                    <p className="text-base sm:text-lg leading-[1.7] font-normal text-neutral-800 max-w-[48ch]">
+                    <p className="text-sm sm:text-base md:text-lg leading-[1.7] font-normal text-neutral-800 max-w-[48ch]">
                       <strong className="font-semibold text-neutral-900">Tydlig ansvarsfördelning</strong> – Vem gör vad, när och hur det mäts.
                     </p>
                   </div>
@@ -817,21 +789,21 @@ function AboutUsSection() {
 
             {/* CTA - integrated with content flow */}
             <Reveal delayMs={1350} y={10}>
-              <div className="pt-8 mt-8 border-t border-neutral-200/50">
+              <div className="pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-neutral-200/50">
                 <a
                   href="/book"
-                  className="group relative inline-flex items-center gap-4 text-base font-medium text-neutral-600 transition-all duration-300 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-2"
+                  className="group relative inline-flex items-center gap-3 sm:gap-4 text-sm sm:text-base font-medium text-neutral-600 transition-all duration-300 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-2"
                 >
                 <div 
                   className="w-[1px] bg-neutral-300 transition-all duration-300 group-hover:bg-neutral-900 group-hover:w-[2px]"
-                  style={{ height: '40px' }}
+                  style={{ height: '32px sm:40px' }}
                   aria-hidden="true"
                 />
                 <span className="relative pb-0.5 inline-block">
                   Boka ett samtal
                   <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-neutral-900 origin-left transition-all duration-400 ease-out scale-x-0 group-hover:scale-x-100 opacity-0 group-hover:opacity-100" />
                 </span>
-                <span className="text-xl transition-all duration-300 group-hover:translate-x-1.5 opacity-70 group-hover:opacity-100" aria-hidden="true">
+                <span className="text-lg sm:text-xl transition-all duration-300 group-hover:translate-x-1.5 opacity-70 group-hover:opacity-100" aria-hidden="true">
                   →
                 </span>
                 </a>

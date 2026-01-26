@@ -1,250 +1,99 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [isAtTop, setIsAtTop] = useState(true);
 
-  // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      setIsAtTop(window.scrollY === 0);
     };
 
+    // Check initial position
+    handleScroll();
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Click outside to close
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      // Focus trap - focus first link when opened
-      setTimeout(() => {
-        const firstLink = dropdownRef.current?.querySelector("a");
-        firstLink?.focus();
-      }, 100);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
-
-  // ESC to close
-  useEffect(() => {
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-        buttonRef.current?.focus();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("keydown", handleEsc);
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-    };
-  }, [isOpen]);
-
-  // Handle smooth scroll with header offset
-  useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const link = target.closest('a[href^="#"]') as HTMLAnchorElement;
-      if (!link) return;
-
-      const href = link.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        e.preventDefault();
-        const id = href.slice(1);
-        const element = document.getElementById(id);
-        if (element) {
-          const headerHeight = 100; // Match HEADER_OFFSET
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - headerHeight;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }
-    };
-
-    document.addEventListener('click', handleAnchorClick);
-    return () => document.removeEventListener('click', handleAnchorClick);
-  }, []);
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[50] flex justify-center pt-4 transition-all duration-300 ${
-        isScrolled ? "pt-3" : "pt-4"
+      className={`fixed top-0 left-0 right-0 z-[50] transition-all duration-300 ${
+        isAtTop ? "border-b border-neutral-200" : ""
       }`}
       role="banner"
     >
-      <nav
-        className={`
-          relative
-          flex items-center justify-between gap-4
-          rounded-full
-          border border-black/6
-          transition-all duration-300
-          ${isScrolled ? "px-4 py-2" : "px-5 py-2.5"}
-        `}
-        style={{ 
-          maxWidth: "calc(100vw - 2rem)",
-          background: 'rgba(255, 255, 255, 0.75)',
+      {/* Background that cuts off - Transparent */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, transparent 0%, transparent 100%)',
           backdropFilter: 'blur(12px) saturate(140%)',
           WebkitBackdropFilter: 'blur(12px) saturate(140%)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)'
         }}
+      />
+      
+      <nav
+        className="relative flex items-center justify-between gap-3 sm:gap-6 px-4 sm:px-6 py-3 sm:py-4 max-w-7xl mx-auto"
       >
         {/* Logo - Left */}
         <Link
           href="/"
           className="flex-shrink-0 no-underline"
-          onClick={() => setIsOpen(false)}
           aria-label="Southbase startsida"
         >
           <Image
-            src="/logos/logga.svg"
+            src="/southbase.png"
             alt="Southbase"
-            width={150}
-            height={50}
-            className="h-10 w-auto md:h-12"
+            width={280}
+            height={88}
+            className="h-12 w-auto md:h-14"
             priority
+            style={{ objectFit: 'contain' }}
           />
         </Link>
 
-        {/* Hamburger - Center */}
-        <div className="flex-1 flex justify-center">
-          <button
-            ref={buttonRef}
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-neutral-700 hover:text-neutral-900 transition-colors rounded-full hover:bg-white/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-2"
-            aria-label="Öppna meny"
-            aria-expanded={isOpen}
-            aria-controls="dropdown-menu"
+        {/* Navigation Links + CTA */}
+        <div className="flex items-center gap-3 sm:gap-6 md:gap-8">
+          <Link
+            href="/#vad"
+            className="group relative inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors duration-300 no-underline"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 8h16M4 16h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* CTA Button - Right (Dark Glassmorphism) */}
-        <Link
-          href="/book"
-          className={`
-            flex-shrink-0
-            inline-flex items-center gap-2
-            rounded-full
-            text-white
-            font-medium
-            transition-all duration-200
-            hover:bg-black/65 active:scale-[0.98]
-            border border-white/12
-            font-[var(--font-general-sans)]
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2
-            ${isScrolled ? "px-4 py-2 text-sm" : "px-5 py-2.5 text-sm"}
-          `}
-          style={{
-            background: 'rgba(0, 0, 0, 0.55)',
-            backdropFilter: 'blur(10px) saturate(120%)',
-            WebkitBackdropFilter: 'blur(10px) saturate(120%)',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.18)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.55)';
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
-          }}
-          onClick={() => setIsOpen(false)}
-        >
-          Boka ett samtal
-          <span className="text-white" aria-hidden="true">→</span>
-        </Link>
-
-        {/* Dropdown Menu - Separate rounded box below pill (Offmenu style) */}
-        <div
-          ref={dropdownRef}
-          id="dropdown-menu"
-          role="menu"
-          className={`
-            absolute top-full left-0 right-0
-            w-full
-            rounded-3xl
-            border border-black/6
-            overflow-hidden
-            transition-all duration-200 ease-out
-            ${isOpen ? "opacity-100 translate-y-0 visible mt-2" : "opacity-0 -translate-y-1 invisible pointer-events-none"}
-          `}
-          style={{
-            background: 'rgba(255, 255, 255, 0.75)',
-            backdropFilter: 'blur(12px) saturate(140%)',
-            WebkitBackdropFilter: 'blur(12px) saturate(140%)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)'
-          }}
-        >
-          <div className="py-1.5">
-            <Link
-              href="/#vad"
-              className="block px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-black/4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-inset"
-              role="menuitem"
-              onClick={() => setIsOpen(false)}
-            >
-              Vad gör vi
-            </Link>
-            <div className="h-px bg-black/6 mx-2" />
-            <Link
-              href="/about"
-              className="block px-4 py-3 text-sm font-medium text-neutral-900 hover:bg-black/4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-inset"
-              role="menuitem"
-              onClick={() => setIsOpen(false)}
-            >
-              Om oss
-            </Link>
-          </div>
+            <span className="hidden sm:inline">Vad gör vi</span>
+            <span className="sm:hidden">Vad gör vi</span>
+            <span className="text-xs sm:text-sm transition-transform duration-300 group-hover:translate-x-0.5 opacity-60 group-hover:opacity-100 hidden sm:inline" aria-hidden="true">→</span>
+            <span className="absolute bottom-0 left-0 right-0 h-[1px] bg-neutral-300 origin-left transition-all duration-300 scale-x-0 group-hover:scale-x-100" />
+          </Link>
+          
+          {/* CTA Button - Apple style with glass effect */}
+          <Link
+            href="/book"
+            className="group inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 whitespace-nowrap"
+            style={{
+              background: 'rgba(0, 0, 0, 0.65)',
+              backdropFilter: 'blur(20px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(0, 0, 0, 0.75)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+              e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
+            }}
+          >
+            <span className="hidden md:inline">Boka ett introduktionsamtal</span>
+            <span className="md:hidden">Boka samtal</span>
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5 hidden sm:inline" aria-hidden="true">→</span>
+          </Link>
         </div>
       </nav>
     </header>

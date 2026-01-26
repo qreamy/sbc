@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Navigation from "./components/Navigation";
+import LoadingScreen from "./components/LoadingScreen";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
@@ -98,6 +99,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-[var(--font-inter)]">
+        <LoadingScreen />
+        
         <a
           href="#innehall"
           className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[100] focus:rounded-lg focus:bg-neutral-900 focus:px-4 focus:py-3 focus:text-white no-underline"
@@ -125,31 +128,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </div>
 
-          <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 md:py-16">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12 md:gap-16">
+          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 sm:gap-12 md:gap-16">
               {/* Brand Column */}
               <div className="flex-1 max-w-md">
-                <Link href="/" className="block mb-4 no-underline -ml-2 md:-ml-3">
+                <Link href="/" className="block mb-3 sm:mb-4 no-underline -ml-1 sm:-ml-2 md:-ml-3">
                   <Image
                     src="/logos/logga.svg"
                     alt="Southbase"
                     width={200}
                     height={67}
-                    className="h-14 w-auto md:h-16"
+                    className="h-12 sm:h-14 md:h-16 w-auto"
                     priority
                   />
                 </Link>
-                <p className="text-sm leading-relaxed text-neutral-600">
+                <p className="text-xs sm:text-sm leading-relaxed text-neutral-600">
                   Vi driver försäljning på uppdrag för nordiska bolag — med struktur, kvalitet och tydlig uppföljning.
                 </p>
               </div>
 
               {/* Contact Column */}
-              <div className="md:text-right">
-                <p className="text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-4">
+              <div className="md:text-right md:pt-4">
+                <p className="text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-3 sm:mb-4">
                   Kontakt
                 </p>
-                <div className="flex flex-col gap-3 md:items-end">
+                <div className="flex flex-col gap-2 sm:gap-3 md:items-end">
                   <a
                     href="mailto:contact@southbase.se"
                     className="text-sm text-neutral-700 hover:text-neutral-900 transition-colors duration-200 no-underline"

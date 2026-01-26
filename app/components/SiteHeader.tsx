@@ -91,12 +91,27 @@ export default function SiteHeader() {
 
           <Link
             href="/book"
-            className="no-underline group inline-flex h-10 items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 text-sm font-medium text-white
-                       shadow-[0_14px_40px_-28px_rgba(0,0,0,0.7)]
-                       transition hover:bg-neutral-800 active:scale-[0.99]"
+            className="no-underline group inline-flex h-10 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            style={{
+              background: 'rgba(0, 0, 0, 0.65)',
+              backdropFilter: 'blur(20px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(0, 0, 0, 0.75)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+              e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
+            }}
           >
             Boka ett samtal
-            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </Link>
         </div>
 
@@ -104,7 +119,24 @@ export default function SiteHeader() {
         <div className="md:hidden flex items-center gap-2">
           <Link
             href="/book"
-            className="no-underline inline-flex h-10 items-center justify-center rounded-full bg-neutral-900 px-4 text-sm font-medium text-white hover:bg-neutral-800 transition"
+            className="no-underline inline-flex h-10 items-center justify-center rounded-full px-4 text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            style={{
+              background: 'rgba(0, 0, 0, 0.65)',
+              backdropFilter: 'blur(20px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(0, 0, 0, 0.75)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+              e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
+            }}
           >
             Boka
           </Link>
@@ -173,10 +205,27 @@ export default function SiteHeader() {
               <Link
                 href="/book"
                 onClick={() => setOpen(false)}
-                className="no-underline group inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 text-sm font-medium text-white hover:bg-neutral-800 transition"
+                className="no-underline group inline-flex h-11 w-full items-center justify-center gap-2 rounded-full px-6 text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                style={{
+                  background: 'rgba(0, 0, 0, 0.65)',
+                  backdropFilter: 'blur(20px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.75)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(0, 0, 0, 0.65)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
+                }}
               >
                 Boka ett samtal
-                <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
               </Link>
             </div>
           </div>
