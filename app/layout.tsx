@@ -16,9 +16,12 @@ export const metadata: Metadata = {
   creator: "Southbase Consulting AB",
   publisher: "Southbase Consulting AB",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    icon: [
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Southbase — Försäljning som fungerar i praktiken",
@@ -31,8 +34,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/icon.svg",
-        width: 499,
-        height: 500,
+        width: 574,
+        height: 574,
         alt: "Southbase logotyp",
       },
     ],
@@ -61,6 +64,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="sv" className={inter.variable}>
       <head>
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="apple-mobile-web-app-title" content="Southbase" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
